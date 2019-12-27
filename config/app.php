@@ -123,6 +123,8 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'developer' => env('DEVELOPER_EMAIL', 'info@contoso.com'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
