@@ -12,10 +12,6 @@
     <!-- Scripts -->
     <script src="{{ mix('js/app.js', 'build') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">
 </head>
@@ -25,6 +21,7 @@
         <div class="container">
             @section('breadcrumbs', Breadcrumbs::render())
             @yield('breadcrumbs')
+            @include('flash::message')
             @yield('content')
         </div>
     </main>

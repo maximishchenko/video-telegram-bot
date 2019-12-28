@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Mail\Auth\Register\VerifyMail;
+use App\Shared;
 use App\User;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -40,6 +45,25 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function verify($token)
+    {
+        if(!$user = User::where('verify_token', $token)->first()) {
+            flash(trans('messages.flash_link_not_identified'))->error();
+            return redirect()->route('login');
+        }
+        if($user->status != Shared::STATUS_WAIT) {
+            flash(trans('messages.flash_email_allready_verified'))->error();
+            return redirect()->route('login');
+        }
+
+        $user->status = Shared::STATUS_ACTIVE;
+        $user->verify_token = null;
+        $user->save();
+
+        flash(trans('messages.flash_email_verified_do_login'))->success();
+        return redirect()->route('login');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -52,6 +76,8 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'sort' => ['integer'],
+            'status' => ['integer'],
         ]);
     }
 
@@ -63,10 +89,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'verify_token' => Str::random(),
+            'status' => Shared::STATUS_WAIT,
+            'sort' => Shared::DEFAULT_SORT,
         ]);
+
+        Mail::to($user->email)->queue(new VerifyMail($user));
+        return $user;
+    }
+
+    protected function registered(Request $request, $user)
+    {
+        $this->guard()->logout();
+
+        flash(trans('messages.flash_check_email_and_verify_register'))->info();
+        return redirect('login');
     }
 }
