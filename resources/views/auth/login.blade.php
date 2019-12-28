@@ -16,9 +16,9 @@
                         <div class="form-group row">
 
                             <div class="offset-3 col-md-6">
-                                <input id="email" placeholder="{{ trans('messages.login_email') }}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="username" placeholder="{{ trans('messages.login_username') }}" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autofocus>
 
-                                @error('email')
+                                @error('username')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

@@ -14,6 +14,7 @@ class AddUserVerificaton extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->string('username')->nullable()->unique();
             $table->smallInteger('status')->nullable();
             $table->integer('sort')->nullable();
             $table->string('verify_token')->nullable()->unique();
@@ -27,6 +28,9 @@ class AddUserVerificaton extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('username');
+        });
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('status');
         });

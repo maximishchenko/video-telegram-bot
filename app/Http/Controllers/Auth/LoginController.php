@@ -13,17 +13,6 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use ThrottlesLogins;
 
     /**
@@ -56,7 +45,7 @@ class LoginController extends Controller
         }
 
         $authenticate = Auth::attempt(
-            $request->only(['email', 'password']),
+            $request->only([$this->username(), 'password']),
             $request->filled('remember')
         );
 
@@ -85,6 +74,6 @@ class LoginController extends Controller
 
     protected function username()
     {
-        return 'name';
+        return 'username';
     }
 }
