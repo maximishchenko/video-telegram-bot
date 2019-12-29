@@ -31,7 +31,7 @@ return [
     'breadcrumbs_register' => 'Регистрация',
     'breadcrumbs_resetpwd' => 'Сброс пароля',
     'breadcrumbs_newpwd' => 'Установка нового пароля',
-    'breadcrumbs_cabinet' => 'Dashboard',
+    'breadcrumbs_cabinet' => 'Кабинет',
     'email_signup_confirmation' => 'Подтверждение регистрации',
     'email_confirmation_header' => 'Подтверждение регистрации',
     'email_btn_verify_email' => 'Подтвердить Email',

@@ -31,3 +31,7 @@ Breadcrumbs::register('cabinet', function (BreadcrumbsGenerator $crumbs) {
     $crumbs->parent('home');
     $crumbs->push(trans('messages.breadcrumbs_cabinet'), route('cabinet'));
 });
+Breadcrumbs::register('admin.home', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('home');
+    $crumbs->push(trans('messages.breadcrumbs_admin'), route('admin.home'));
+});
