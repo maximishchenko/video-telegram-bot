@@ -14,6 +14,6 @@ class Shared
 
     public const DEFAULT_SORT = 500;
 
-    public const DEFAULT_PAGINATE = 20;
+    public const DEFAULT_PAGINATE = 5;
 
 }
