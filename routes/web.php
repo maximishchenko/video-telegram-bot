@@ -17,6 +17,8 @@ Route::group(
     ],
     function () {
         Route::get('/', 'HomeController@index')->name('home');
+        Route::post('/users/{user}/changeStatus', 'UsersController@changeStatus')->name('users.changeStatus');
+        Route::resource('users', 'UsersController');
     }
 );
 

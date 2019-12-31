@@ -15,7 +15,7 @@ class AddUserVerificaton extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->nullable()->unique();
-            $table->smallInteger('status')->nullable();
+            $table->string('status')->nullable();
             $table->integer('sort')->nullable();
             $table->string('verify_token')->nullable()->unique();
         });

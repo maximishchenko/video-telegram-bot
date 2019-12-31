@@ -7,27 +7,17 @@ use App\Mail\Auth\Register\VerifyMail;
 use App\Shared;
 use App\Entity\User;
 use App\Http\Controllers\Controller;
+use App\UseCases\RegisterService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
-    /**
-     * Where to redirect users after registration.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/cabinet';
+    private $service;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function __construct(RegisterService $service)
     {
-        $this->middleware('guest');
+        $this->service = $service;
     }
 
     public function showRegistrationForm()
@@ -37,16 +27,7 @@ class RegisterController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $user = User::create([
-            'name' => $request['name'],
-            'username' => $request['username'],
-            'email' => $request['email'],
-            'password' => bcrypt($request['password']),
-            'verify_token' => Str::random(),
-            'status' => Shared::STATUS_WAIT,
-        ]);
-        Mail::to($user->email)->queue(new VerifyMail($user));
-        event(new Registered($user));
+        $this->service->register($request);
 
         flash(trans('messages.flash_check_email_and_verify_register'))->success();
         return redirect()->route('login');
@@ -58,16 +39,14 @@ class RegisterController extends Controller
             flash(trans('messages.flash_link_not_identified'))->error();
             return redirect()->route('login');
         }
-        if($user->status != Shared::STATUS_WAIT) {
-            flash(trans('messages.flash_email_allready_verified'))->error();
+
+        try {
+            $this->service->verify($user->id);
+            flash(trans('messages.flash_email_verified_do_login'))->success();
+            return redirect()->route('login');
+        } catch (\DomainException $e) {
+            flash($e->getMessage())->error();
             return redirect()->route('login');
         }
-
-        $user->status = Shared::STATUS_ACTIVE;
-        $user->verify_token = null;
-        $user->save();
-
-        flash(trans('messages.flash_email_verified_do_login'))->success();
-        return redirect()->route('login');
     }
 }

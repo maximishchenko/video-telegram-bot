@@ -6,23 +6,14 @@ namespace App;
 
 class Shared
 {
-    /**
-     * Статус "Активен"
-     */
-    const STATUS_ACTIVE = 1;
+    public const STATUS_ACTIVE = 'active';
 
-    /**
-     * Статус "Заблокирован"
-     */
-    const STATUS_BLOCKED = 0;
+    public const STATUS_BLOCKED = 'blocked';
 
-    /**
-     * Статус "Ожидает подтверждения"
-     */
-    const STATUS_WAIT = 2;
+    public const STATUS_WAIT = 'wait';
 
-    /**
-     * Значение сортировки по-умолчанию
-     */
-    const DEFAULT_SORT = 500;
+    public const DEFAULT_SORT = 500;
+
+    public const DEFAULT_PAGINATE = 20;
+
 }
