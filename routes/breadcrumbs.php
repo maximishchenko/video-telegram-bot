@@ -55,3 +55,7 @@ Breadcrumbs::register('admin.users.edit', function (BreadcrumbsGenerator $crumbs
     $crumbs->parent('admin.users.show', $user);
     $crumbs->push(trans('messages.breadcrumbs_admin_users_update'), route('admin.users.edit', $user));
 });
+Breadcrumbs::register('admin.users.password', function (BreadcrumbsGenerator $crumbs, User $user) {
+    $crumbs->parent('admin.users.show', $user);
+    $crumbs->push(trans('messages.admin_btn_password'), route('admin.users.password', $user));
+});

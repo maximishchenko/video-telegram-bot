@@ -12,7 +12,7 @@ class User extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'status', 'sort', 'password', 'username', 'verify_token'
+        'name', 'email', 'status', 'password', 'username', 'verify_token', 'role', 'phone'
     ];
 
     protected $hidden = [
@@ -23,28 +23,37 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public static function register(string $name, string $username, string $email, string $password): self
+    public static function register(string $name, string $username, string $email, string $phone, string $password): self
     {
         return static::create([
             'name' => $name,
             'username' => $username,
             'email' => $email,
+            'phone' => $phone,
             'password' => bcrypt($password),
             'verify_token' => Str::random(),
-            'sort' => Shared::DEFAULT_SORT,
-            'status' => Shared::STATUS_WAIT
+            'status' => Shared::STATUS_ACTIVE,
+            'role' => Shared::ROLE_USER,
         ]);
     }
 
-    public static function new(string $name, string $username, string $email): self
+    public static function new(string $name, string $username, string $email, string $phone): self
     {
         return static::create([
             'name' => $name,
             'username' => $username,
             'email' => $email,
+            'phone' => $phone,
             'password' => bcrypt(Str::random()),
-            'sort' => Shared::DEFAULT_SORT,
-            'status' => Shared::STATUS_ACTIVE
+            'status' => Shared::STATUS_ACTIVE,
+            'role' => Shared::ROLE_USER,
+        ]);
+    }
+
+    public function changePassword(string $password)
+    {
+        return $this->update([
+            'password' => bcrypt($password)
         ]);
     }
 
@@ -61,6 +70,21 @@ class User extends Authenticatable
     public function isBlocked(): bool
     {
         return $this->status === Shared::STATUS_BLOCKED;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->role === Shared::ROLE_ADMIN;
+    }
+
+    public function isUser(): bool
+    {
+        return $this->role === Shared::ROLE_USER;
+    }
+
+    public function isManager(): bool
+    {
+        return $this->role === Shared::ROLE_MANAGER;
     }
 
     public function verify(): void
@@ -92,5 +116,21 @@ class User extends Authenticatable
     public function changeStatusConfirmMessage(): string
     {
         return $this->isActive() ? trans('messages.do_block') : trans('messages.do_active');
+    }
+
+    public function changeStatusButtonText(): string
+    {
+        return $this->isActive() ? trans('messages.admin_user_btn_block') : trans('messages.admin_user_btn_active');
+    }
+
+    public function changeRole($role): void
+    {
+        if(!\in_array($role, array_keys(Shared::getRolesArray()))) {
+            throw new \InvalidArgumentException('Undefined role "' . $role . '"');
+        }
+        if ($this->role === $role) {
+            throw new \DomainException('Role is already assigned.');
+        }
+        $this->update(['role' => $role]);
     }
 }

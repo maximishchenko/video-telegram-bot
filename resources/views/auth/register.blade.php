@@ -39,10 +39,32 @@
 
                         <div class="form-group row">
                             <div class="offset-3 col-md-6">
+                                <input id="phone" placeholder="{{ trans('messages.register_phone') }}" type="phone" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="off">
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-3 col-md-6">
+                                <input type="checkbox" id="phoneFreeFormat"
+                                       onchange="maskphone('phone', 'phoneFreeFormat')"
+                                >
+                                <label for="phoneFreeFormat">Ввести в свободном формате</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="offset-3 col-md-6">
                                 <input id="email" placeholder="{{ trans('messages.register_email') }}" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
+                                <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
@@ -80,4 +102,10 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+        window.maskphone('phone', 'phoneFreeFormat');
+</script>
+
+
 @endsection

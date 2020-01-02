@@ -18,6 +18,8 @@ Route::group(
     function () {
         Route::get('/', 'HomeController@index')->name('home');
         Route::post('/users/{user}/changeStatus', 'UsersController@changeStatus')->name('users.changeStatus');
+        Route::post('/users/{user}/setpassword', 'UsersController@setpassword')->name('users.setpassword');
+        Route::get('/users/{user}/password', 'UsersController@password')->name('users.password');
         Route::resource('users', 'UsersController');
     }
 );

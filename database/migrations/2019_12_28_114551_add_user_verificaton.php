@@ -1,5 +1,6 @@
 <?php
 
+use App\Shared;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
@@ -16,9 +17,12 @@ class AddUserVerificaton extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('username')->nullable()->unique();
             $table->string('status')->nullable();
-            $table->integer('sort')->nullable();
+            $table->string('phone')->nullable();
             $table->string('verify_token')->nullable()->unique();
         });
+        DB::table('users')->update([
+            'status' => Shared::STATUS_ACTIVE
+        ]);
     }
 
     /**
@@ -35,7 +39,7 @@ class AddUserVerificaton extends Migration
             $table->dropColumn('status');
         });
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('sort');
+            $table->dropColumn('phone');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('verify_token');

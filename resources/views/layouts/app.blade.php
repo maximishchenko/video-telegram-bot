@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ mix('js/app.js', 'build') }}" defer></script>
+    <script src="{{ mix('js/phonemask.js', 'build') }}"></script>
 
     <!-- Styles -->
     <link href="{{ mix('css/app.css', 'build') }}" rel="stylesheet">

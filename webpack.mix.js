@@ -15,5 +15,6 @@ mix
     .setPublicPath('public/build')
     .setResourceRoot('build')
     .js('resources/js/app.js', 'js')
+    .js('resources/js/phonemask.js', 'js')
     .sass('resources/sass/app.scss', 'css')
     .version();

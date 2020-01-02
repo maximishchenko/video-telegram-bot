@@ -29,10 +29,11 @@ class RegisterService
             $request['name'],
             $request['username'],
             $request['email'],
+            $request['phone'],
             $request['password']
         );
 
-        $this->mailer->to($user->email)->send(new VerifyMail($user));
+//        $this->mailer->to($user->email)->send(new VerifyMail($user));
         $this->dispatcher->dispatch(new Registered($user));
     }
 
