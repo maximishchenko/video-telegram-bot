@@ -21,6 +21,8 @@ Route::group(
         Route::post('/users/{user}/setpassword', 'UsersController@setpassword')->name('users.setpassword');
         Route::get('/users/{user}/password', 'UsersController@password')->name('users.password');
         Route::resource('users', 'UsersController');
+        Route::post('/vpngroups/{user}/changeStatus', 'VpngroupsController@changeStatus')->name('vpngroups.changeStatus');
+        Route::resource('vpngroups', 'VpngroupsController');
     }
 );
 

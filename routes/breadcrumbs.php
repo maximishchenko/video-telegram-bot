@@ -1,6 +1,7 @@
 <?php
 
 use App\Entity\User;
+use App\Entity\VpnGroups;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
@@ -58,4 +59,30 @@ Breadcrumbs::register('admin.users.edit', function (BreadcrumbsGenerator $crumbs
 Breadcrumbs::register('admin.users.password', function (BreadcrumbsGenerator $crumbs, User $user) {
     $crumbs->parent('admin.users.show', $user);
     $crumbs->push(trans('messages.admin_btn_password'), route('admin.users.password', $user));
+});
+
+
+
+
+
+
+
+Breadcrumbs::register('admin.vpngroups.index', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push(trans('messages.vpngroups'), route('admin.vpngroups.index'));
+});
+
+Breadcrumbs::register('admin.vpngroups.create', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.vpngroups.index');
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpngroups_create'), route('admin.vpngroups.create'));
+});
+Breadcrumbs::register('admin.vpngroups.show', function (BreadcrumbsGenerator $crumbs, $id) {
+    $group = VpnGroups::findOrFail($id);
+    $crumbs->parent('admin.vpngroups.index');
+    $crumbs->push($group->name, route('admin.vpngroups.show', ['id' => $id]));
+});
+Breadcrumbs::register('admin.vpngroups.edit', function (BreadcrumbsGenerator $crumbs, $id) {
+    $group = VpnGroups::findOrFail($id);
+    $crumbs->parent('admin.vpngroups.show', $id);
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpngroups_update'), route('admin.vpngroups.edit', $group));
 });

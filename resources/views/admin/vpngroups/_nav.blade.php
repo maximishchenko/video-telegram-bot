@@ -6,12 +6,12 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.users.index') }}">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
             {{ trans('messages.dashboard_admin_users') }}
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.vpngroups.index') }}">
+        <a class="nav-link active" href="{{ route('admin.vpngroups.index') }}">
             {{ trans('messages.dashboard_admin_vpngroups') }}
         </a>
     </li>

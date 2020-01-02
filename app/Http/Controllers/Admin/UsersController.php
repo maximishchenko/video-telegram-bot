@@ -66,7 +66,8 @@ class UsersController extends Controller
             $request['name'],
             $request['username'],
             $request['phone'],
-            $request['email']);
+            $request['email']
+        );
         return redirect()->route('admin.users.show', $user);
     }
 

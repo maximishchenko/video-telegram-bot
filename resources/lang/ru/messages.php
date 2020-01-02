@@ -89,4 +89,12 @@ return [
     'admin_btn_password' => 'Смена пароля',
     'btn_search' => 'Поиск',
     'cancel_search' => 'Отмена',
+    'admin_vpngroups_id' => 'ID',
+    'admin_vpngroups_name' => 'Название группы',
+    'admin_vpngroups_status' => 'Статус',
+    'dashboard_admin_vpngroups' => 'Группы клиентов',
+    'breadcrumbs_admin_vpngroups' => 'Группы клиентов',
+    'vpngroups' => 'Группы клиентов',
+    'admin_vpngroups' => 'Группы клиентов',
+    'admin_vpngroups_comment' => 'Комментарий'
 ];
