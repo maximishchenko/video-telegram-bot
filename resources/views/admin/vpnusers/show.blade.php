@@ -2,7 +2,9 @@
 
 @section('content')
     @include('admin.vpnusers._nav')
-
+    <style>
+        .msk{ -webkit-text-security: disc !important; }
+    </style>
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm mr-1">
@@ -51,8 +53,14 @@
             <td>{{ $user->group->name }}</td>
         </tr>
         <tr>
-            <th>{{ trans('messages.admin_vpnusers_password_plain') }}</th>
-            <td>{{ $user->password_plain }}</td>
+            <th>
+                {{ trans('messages.admin_vpnusers_password_plain') }}
+            </th>
+            <td>
+                <span id="msk" class="msk">{{ $user->password_plain }}</span>
+                &nbsp; <input id="togglepwd" type="checkbox" onchange="window.pwd('msk', 'msk')">&nbsp; Show Password
+
+            </td>
         </tr>
         <tr>
             <th>{{ trans('messages.admin_vpngroups_status') }}</th>

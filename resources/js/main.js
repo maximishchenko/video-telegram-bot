@@ -29,3 +29,13 @@ window.maskphone = function(textInputID, checkboxID) {
         input.addEventListener("blur", window.mask, false);
     }
 };
+
+window.pwd = function (inputID, classID) {
+    var element = document.getElementById(inputID);
+    if (element.classList.contains(classID)) {
+        element.classList.remove(classID);
+    } else {
+        element.classList.add(classID);
+    }
+
+}

@@ -28,18 +28,15 @@ class AuthCommand extends Command
             ['status', Shared::STATUS_ACTIVE],
             ['login', $login]
         ])->first()) {
-            $this->error('User not found!');
-            exit(1);
+            $this->error("error");
             return false;
         }
 
         if (md5($password) != $user->password_hash) {
-            $this->error('Auth failed!');
-            exit(1);
+            $this->error("error");
             return false;
         } else {
-            $this->info('Auth success!');
-            exit(0);
+            $this->info("success");
             return true;
         }
     }

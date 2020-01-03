@@ -1,0 +1,17 @@
+#!/usr/bin/php
+
+<?php
+
+$root = "/var/www/html/ag";
+$login = getenv('username');
+$pwd = getenv('password');
+
+$cmd = exec("php $root/artisan user:auth $login $pwd", $o, $v);
+
+if (json_encode($o[0]) == "\"scc\"") {
+        echo "user authorized";
+        exit(0);
+} else {
+        echo "authorization failed";
+        exit(1);
+}
