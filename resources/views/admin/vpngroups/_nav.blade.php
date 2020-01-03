@@ -15,5 +15,10 @@
             {{ trans('messages.dashboard_admin_vpngroups') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.vpnusers.index') }}">
+            {{ trans('messages.dashboard_admin_vpnusers') }}
+        </a>
+    </li>
 </ul>
 

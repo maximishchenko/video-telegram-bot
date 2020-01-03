@@ -2,6 +2,7 @@
 
 use App\Entity\User;
 use App\Entity\VpnGroups;
+use App\Entity\VpnUsers;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 
@@ -62,11 +63,6 @@ Breadcrumbs::register('admin.users.password', function (BreadcrumbsGenerator $cr
 });
 
 
-
-
-
-
-
 Breadcrumbs::register('admin.vpngroups.index', function (BreadcrumbsGenerator $crumbs) {
     $crumbs->parent('admin.home');
     $crumbs->push(trans('messages.vpngroups'), route('admin.vpngroups.index'));
@@ -85,4 +81,37 @@ Breadcrumbs::register('admin.vpngroups.edit', function (BreadcrumbsGenerator $cr
     $group = VpnGroups::findOrFail($id);
     $crumbs->parent('admin.vpngroups.show', $id);
     $crumbs->push(trans('messages.breadcrumbs_admin_vpngroups_update'), route('admin.vpngroups.edit', $group));
+});
+
+
+
+
+
+
+
+
+
+Breadcrumbs::register('admin.vpnusers.index', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push(trans('messages.vpnusers'), route('admin.vpnusers.index'));
+});
+
+Breadcrumbs::register('admin.vpnusers.password', function (BreadcrumbsGenerator $crumbs, $id) {
+    $user = VpnUsers::findOrFail($id);
+//    $crumbs->parent('admin.vpnusers.show', ['id' => $id]);
+    $crumbs->push(trans('messages.admin_btn_password'), route('admin.vpnusers.password', ['id' => $id]));
+});
+Breadcrumbs::register('admin.vpnusers.create', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.vpnusers.index');
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpnusers_create'), route('admin.vpnusers.create'));
+});
+Breadcrumbs::register('admin.vpnusers.show', function (BreadcrumbsGenerator $crumbs, $id) {
+    $group = VpnUsers::findOrFail($id);
+    $crumbs->parent('admin.vpnusers.index');
+    $crumbs->push($group->name, route('admin.vpnusers.show', ['id' => $id]));
+});
+Breadcrumbs::register('admin.vpnusers.edit', function (BreadcrumbsGenerator $crumbs, $id) {
+    $group = VpnGroups::findOrFail($id);
+    $crumbs->parent('admin.vpnusers.show', $id);
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpnusers_update'), route('admin.vpnusers.edit', $group));
 });

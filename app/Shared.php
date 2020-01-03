@@ -38,4 +38,12 @@ class Shared
         ];
     }
 
+    public static function getShortStatusesArray(): array
+    {
+        return [
+            static::STATUS_ACTIVE => trans('roles.active'),
+            static::STATUS_BLOCKED => trans('roles.blocked'),
+        ];
+    }
+
 }

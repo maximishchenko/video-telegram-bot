@@ -61,4 +61,54 @@
         </tbody>
     </table>
 
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>
+                    {{ trans('messages.admin_vpnusers_id') }}
+                </th>
+                <th>
+                    {{ trans('messages.admin_vpnusers_name') }}
+                </th>
+                <th>
+                    {{ trans('messages.admin_vpnusers_login') }}
+                </th>
+                <th>
+                    {{ trans('messages.admin_vpnusers_comment') }}
+                </th>
+                <th>
+                    {{ trans('messages.admin_vpnusers_status') }}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($group->clients as $client)
+                <tr>
+                    <td>
+                        {{ $client->id }}
+                    </td>
+                    <td>
+                        <a href="{{ route('admin.vpnusers.show', ['id' => $client->id]) }}" target="_blank">
+                            {{ $client->name }}
+                        </a>
+                    </td>
+                    <td>
+                        {{ $client->login }}
+                    </td>
+                    <td>
+                        {{ $client->comment }}
+                    </td>
+                    <td>
+                        @if ($client->isActive())
+                            <span class="badge badge-success">{{ trans('messages.status_active') }}</span>
+                        @endif
+                        @if ($client->isBlocked())
+                            <span class="badge badge-danger">{{ trans('messages.status_blocked') }}</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
 @endsection

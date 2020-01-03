@@ -33,7 +33,7 @@
                             </label>
                             <select name="status" id="status" class="form-control">
                                 <option value=""></option>
-                                @foreach(\App\Entity\VpnGroups::getStatusesArray() as $value => $label)
+                                @foreach(\App\Shared::getShortStatusesArray() as $value => $label)
                                     <option value="{{ $value }}" {{ $value === request('status') ? ' selected' : '' }}>
                                         {{ $label }}
                                     </option>

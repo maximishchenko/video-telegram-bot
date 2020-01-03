@@ -6,7 +6,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="{{ route('admin.users.index') }}">
+        <a class="nav-link" href="{{ route('admin.users.index') }}">
             {{ trans('messages.dashboard_admin_users') }}
         </a>
     </li>
@@ -16,7 +16,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('admin.vpnusers.index') }}">
+        <a class="nav-link active" href="{{ route('admin.vpnusers.index') }}">
             {{ trans('messages.dashboard_admin_vpnusers') }}
         </a>
     </li>

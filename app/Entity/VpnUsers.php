@@ -4,21 +4,27 @@ namespace App\Entity;
 
 use App\Shared;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
-class VpnGroups extends Model
+class VpnUsers extends Model
 {
 
-    protected $table = 'vpn_groups';
+    protected $table = 'vpn_users';
 
     protected $fillable = [
-        'name', 'status', 'comment'
+        'name', 'login', 'status', 'comment', 'password_hash', 'password_plain', 'group_id'
     ];
 
-    public static function new(string  $name, string $comment = null)
+    public static function new(string  $name, string $login, int $group_id, string $comment = null)
     {
+        $password = Str::random(8);
         return static::create([
             'name' => $name,
             'comment' => $comment,
+            'login' => $login,
+            'password_hash' => md5($password),
+            'password_plain' => $password,
+            'group_id' => $group_id,
             'status' => Shared::STATUS_ACTIVE,
         ]);
     }
@@ -58,8 +64,17 @@ class VpnGroups extends Model
         ]);
     }
 
-    public function clients()
+    public function changePassword(string $password)
     {
-        return $this->hasMany('\App\Entity\VpnUsers', 'group_id', 'id');
+        return $this->update([
+            'password_plain' => $password,
+            'password_hash' => md5($password)
+        ]);
+    }
+
+    public function group()
+    {
+        return $this->hasOne('App\Entity\VpnGroups', 'id', 'group_id');
+
     }
 }

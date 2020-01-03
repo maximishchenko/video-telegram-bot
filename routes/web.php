@@ -23,6 +23,11 @@ Route::group(
         Route::resource('users', 'UsersController');
         Route::post('/vpngroups/{user}/changeStatus', 'VpngroupsController@changeStatus')->name('vpngroups.changeStatus');
         Route::resource('vpngroups', 'VpngroupsController');
+        Route::resource('vpnusers', 'VpnusersController');
+        Route::post('/vpnusers/{user}/changeStatus', 'VpnusersController@changeStatus')->name('vpnusers.changeStatus');
+        Route::post('/vpnusers/{user}/setpassword', 'VpnusersController@setpassword')->name('vpnusers.setpassword');
+        Route::get('/vpnusers/{user}/password', 'VpnusersController@password')->name('vpnusers.password');
+
     }
 );
 
