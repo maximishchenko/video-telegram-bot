@@ -1,0 +1,7 @@
+#!/usr/bin/php
+
+<?php
+$login = getenv("username");
+$password = getenv("password");
+$pathToArtisan = '/var/www/html/ag';
+echo exec("cd $pathToArtisan && php artisan user:auth " . $login . " " . $password);

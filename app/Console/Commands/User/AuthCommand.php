@@ -24,25 +24,23 @@ class AuthCommand extends Command
         $login = $this->argument('login');
         $password = $this->argument('password');
 
-//        $login = getenv("username");
-//        $password = getenv("password");
-
-        $password = md5($password);
-
         if (!$user = VpnUsers::where([
             ['status', Shared::STATUS_ACTIVE],
             ['login', $login]
         ])->first()) {
             $this->error('User not found!');
             exit(1);
+            return false;
         }
 
-        if ($password != $user->password_hash) {
+        if (md5($password) != $user->password_hash) {
             $this->error('Auth failed!');
             exit(1);
+            return false;
         } else {
             $this->info('Auth success!');
             exit(0);
+            return true;
         }
     }
 
