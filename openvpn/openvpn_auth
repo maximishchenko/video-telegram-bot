@@ -8,7 +8,7 @@ $pwd = getenv('password');
 
 $cmd = exec("php $root/artisan vpn:auth $login $pwd", $o, $v);
 
-if (json_encode($o[0]) == "\"scc\"") {
+if (json_encode($o[0]) == "\"success\"") {
         echo "user authorized";
         exit(0);
 } else {

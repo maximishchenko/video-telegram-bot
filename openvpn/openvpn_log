@@ -8,15 +8,8 @@ $common_name = getenv('common_name');
 $ifconfig_pool_remote_ip = getenv('ifconfig_pool_remote_ip');
 $untrusted_ip = getenv('untrusted_ip');
 
-#$cmd = exec("php $root/artisan user:auth $login $pwd", $o, $v);
-
-# $data = json_encode($o[0]).PHP_EOL;
-# $data = $result.PHP_EOL;
-
 if ($script_type == 'client-connect') {
-        $data = $common_name.'-connect-'.$ifconfig_pool_remote_ip.'-'.$untrusted_ip.PHP_EOL;
+    $cmd = exec("php $root/artisan log:connect $common_name $script_type $ifconfig_pool_remote_ip $untrusted_ip", $o, $v);
 } elseif ($script_type == 'client-disconnect') {
-        $data = $common_name.'-disconnect'.PHP_EOL;
+    $cmd = exec("php $root/artisan log:disconnect $common_name $script_type", $o, $v);
 }
-$fp = fopen('/var/log/somefile.txt', 'a');
-fwrite($fp, $data);
