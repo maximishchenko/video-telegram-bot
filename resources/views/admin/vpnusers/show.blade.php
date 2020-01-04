@@ -5,6 +5,7 @@
         .msk{ -webkit-text-security: disc !important; }
     </style>
 
+
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm mr-1">
             {{ trans('messages.admin_vpnusers') }}
@@ -32,6 +33,9 @@
             </button>
         </form>
     </div>
+
+    <div class="row">
+        <div class="col-md-6">
 
     <table class="table table table-bordered">
         <tbody>
@@ -82,5 +86,45 @@
         </tr>
         </tbody>
     </table>
+
+        </div>
+        <div class="col-md-6">
+
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Последнее подключение</th>
+                    <th>Последний выданный ip-адрес</th>
+                    <th>Послений используемый ip-адрес клиента</th>
+                </tr>
+                <tr>
+                    <td>
+                        @if(isset($lastLog->created_at))
+                            {{ $lastLog->created_at }} <br>
+                        @else
+                            никогда <br>
+                        @endif
+                    </td>
+                    <td>
+                        @if(isset($lastLog->remote_ip))
+                            {{ $lastLog->remote_ip }} <br>
+                        @else
+                            никогда <br>
+                        @endif
+                    </td>
+                    <td>
+                        @if (isset($lastLog->request_ip))
+                            {{ $lastLog->request_ip }} <br>
+                        @else
+                            никогда <br>
+                        @endif
+                    </td>
+                </tr>
+            </table>
+
+
+
+
+        </div>
+    </div>
 
 @endsection

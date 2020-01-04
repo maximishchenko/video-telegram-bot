@@ -11,4 +11,4 @@ php artisan tinker
 >>> $user = factory(\App\Entity\User::class, 5)->create();
 >>> $vpngroups = factory(\App\Entity\VpnGroups::class, 30)->create();
 >>> $vpnusers = factory(\App\Entity\VpnUsers::class, 150)->create();
->>> $vevents = factory(\App\Entity\VpnLog::class, 350)->create();
+>>> $vpnlogs = factory(\App\Entity\VpnLog::class, 50)->create();

@@ -123,7 +123,8 @@ Breadcrumbs::register('admin.vpnusers.show', function (BreadcrumbsGenerator $cru
     $crumbs->push($group->name, route('admin.vpnusers.show', ['id' => $id]));
 });
 Breadcrumbs::register('admin.vpnusers.edit', function (BreadcrumbsGenerator $crumbs, $id) {
-    $group = VpnGroups::findOrFail($id);
+    $user = VpnUsers::findOrFail($id);
+    $group = VpnGroups::findOrFail($user->group_id);
     $crumbs->parent('admin.vpnusers.show', $id);
     $crumbs->push(trans('messages.breadcrumbs_admin_vpnusers_update'), route('admin.vpnusers.edit', $group));
 });

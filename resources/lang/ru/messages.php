@@ -122,8 +122,10 @@ return [
     'admin_vpnlogs_event' => 'Событие',
     'admin_vpnlogs_remote_ip' => 'ip-выданный',
     'admin_vpnlogs_request_ip' => 'ip-исходный',
-    'admin_vpnlogs_created_at' => 'Время наступления события',
+    'admin_vpnlogs_created_at' => 'Время события',
     'client_connected' => 'Подключение',
     'client_disconnected' => 'Отключение',
     'admin_access_to_all_groups' => 'Администратор имеет доступ ко всем группам',
+    'admin_vpnlogs_group_id' => 'Группа пользователей',
+    'admin_vpnlogs_name' => 'Имя клиента',
 ];

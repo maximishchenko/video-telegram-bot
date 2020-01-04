@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <h4 class="alert-danger">Запретить редактирование имени пользователя!!!</h4>
+
     <div class="card mb-3">
         <div class="card-body">
             <form action="?" method="GET" autocomplete="off">

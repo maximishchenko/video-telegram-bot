@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Entity\User;
 use App\Entity\VpnGroups;
+use App\Entity\VpnLog;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\PasswordRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;

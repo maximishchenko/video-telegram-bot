@@ -30,7 +30,8 @@ Route::group(
         Route::post('/vpnusers/{user}/changeStatus', 'VpnusersController@changeStatus')->name('vpnusers.changeStatus');
         Route::post('/vpnusers/{user}/setpassword', 'VpnusersController@setpassword')->name('vpnusers.setpassword');
         Route::get('/vpnusers/{user}/password', 'VpnusersController@password')->name('vpnusers.password');
-        Route::resource('vpnlogs', 'VpnLogController');
+        Route::get('/vpnlogs', 'VpnLogController@index')->name('vpnlogs.index');
+        Route::get('/vpnlogs/index', 'VpnLogController@index')->name('vpnlogs.index');
     }
 );
 

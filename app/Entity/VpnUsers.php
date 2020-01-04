@@ -75,6 +75,5 @@ class VpnUsers extends Model
     public function group()
     {
         return $this->hasOne('App\Entity\VpnGroups', 'id', 'group_id');
-
     }
 }

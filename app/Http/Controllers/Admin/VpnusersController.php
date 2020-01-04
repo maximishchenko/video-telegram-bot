@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\VpnGroups;
+use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
 use App\Http\Requests\Admin\VpnUsers\CreateRequest;
 use App\Http\Requests\Admin\VpnUsers\PasswordRequest;
@@ -60,12 +61,17 @@ class VpnusersController extends Controller
     public function show($id)
     {
         $user = VpnUsers::findOrFail($id);
-        return view('admin.vpnusers.show', compact('user'));
+        $lastLog = VpnLog::where([
+            ['common_name', $user->login],
+            ['event', Shared::CLIENT_CONNECT]
+        ])->latest()->first();
+        return view('admin.vpnusers.show', compact('user', 'lastLog'));
     }
 
     public function edit($id)
     {
         $user = VpnUsers::findOrFail($id);
+//        $user = $id;
         return view('admin.vpnusers.edit', compact('user'));
     }
 

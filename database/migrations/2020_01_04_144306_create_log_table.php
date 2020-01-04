@@ -16,6 +16,8 @@ class CreateLogTable extends Migration
         Schema::create('vpn_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('common_name');
+            $table->string('name');
+            $table->string('group');
             $table->string('event');
             $table->string('remote_ip')->nullable();
             $table->string('request_ip')->nullable();

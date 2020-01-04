@@ -6,15 +6,7 @@
         <div class="card-body">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="id" class="col-form-label">
-                                {{ trans('messages.admin_vpnlogs_id') }}
-                            </label>
-                            <input placeholder="" id="id" name="id" value="{{ request('id') }}" class="form-control" type="text">
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label for="common_name" class="col-form-label">
                                 {{ trans('messages.admin_vpnlogs_common_name') }}
@@ -22,7 +14,7 @@
                             <input placeholder="" id="common_name" name="common_name" value="{{ request('common_name') }}" class="form-control" type="text">
                         </div>
                     </div>
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-group">
                             <label for="event" class="col-form-label">
                                 {{ trans('messages.admin_vpnlogs_event') }}
@@ -30,11 +22,27 @@
                             <select name="event" id="event" class="form-control">
                                 <option value=""></option>
                                 @foreach(\App\Shared::getEventsArray() as $value => $label)
-                                    <option value="{{ $value }}" {{ $value === request('event') ? ' event' : '' }}>
+                                    <option value="{{ $value }}" {{ $value === request('event') ? ' selected' : '' }}>
                                         {{ $label }}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="remote_ip" class="col-form-label">
+                                {{ trans('messages.admin_vpnlogs_remote_ip') }}
+                            </label>
+                            <input placeholder="" id="remote_ip" name="remote_ip" value="{{ request('remote_ip') }}" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <label for="request_ip" class="col-form-label">
+                                {{ trans('messages.admin_vpnlogs_request_ip') }}
+                            </label>
+                            <input placeholder="" id="request_ip" name="request_ip" value="{{ request('request_ip') }}" class="form-control" type="text">
                         </div>
                     </div>
                     <div class="col-sm-3">
@@ -59,6 +67,8 @@
         <tr>
             <th>{{ trans('messages.admin_vpnlogs_id') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_common_name') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_name') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_group_id') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_event') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_remote_ip') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_request_ip') }}</th>
@@ -73,7 +83,13 @@
                     {{ $log->id }}
                 </td>
                 <td>
-                    {{ $log->vpngroup->name }} ({{ $log->common_name }})
+                    {{ $log->common_name }}
+                </td>
+                <td>
+                    {{ $log->name }}
+                </td>
+                <td>
+                    {{ $log->group }}
                 </td>
                 <td>
 
@@ -84,8 +100,16 @@
                         <span class="badge badge-danger">{{ trans('messages.client_disconnected') }}</span>
                     @endif
                 </td>
-                <td>{{ $log->remote_ip }}</td>
-                <td>{{ $log->request_ip }}</td>
+                <td>
+                    @if ($log->remote_ip !== 'null')
+                        {{ $log->remote_ip }}
+                    @endif
+                </td>
+                <td>
+                    @if ($log->request_ip !== 'null')
+                    {{ $log->request_ip }}
+                    @endif
+                </td>
                 <td>{{ $log->created_at }}</td>
 
         @endforeach

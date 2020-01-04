@@ -2,12 +2,14 @@
 
 namespace App\Console\Commands\Vpn;
 
+use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
+use App\Entity\VpnUsers;
 use Illuminate\Console\Command;
 
-class LogConnectCommand extends Command
+class LogAppendCommand extends Command
 {
-    protected $signature = 'log:connect {common_name} {event} {remote_ip} {request_ip}';
+    protected $signature = 'log:append {common_name} {event} {remote_ip=null} {request_ip=null}';
 
     protected $description = 'Connect log';
 
@@ -23,9 +25,14 @@ class LogConnectCommand extends Command
         $remote_ip = $this->argument('remote_ip');
         $request_ip = $this->argument('request_ip');
 
+        $user = VpnUsers::where('login',$common_name)->first();
+        $group = VpnGroups::where('id',$user->group_id)->first();
+
         $log = VpnLog::create([
             'common_name' => $common_name,
+            'name' => $user->name,
             'event' => $event,
+            'group' => $group->name,
             'remote_ip' => $remote_ip,
             'request_ip' => $request_ip
         ]);

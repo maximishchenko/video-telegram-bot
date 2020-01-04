@@ -10,7 +10,7 @@ class VpnLog extends Model
     protected $table = 'vpn_logs';
 
     protected $fillable = [
-        'common_name', 'event', 'remote_ip', 'request_ip'
+        'common_name', 'name', 'group', 'event', 'remote_ip', 'request_ip'
     ];
 
     public function connected()
@@ -23,8 +23,12 @@ class VpnLog extends Model
         return $this->event === Shared::CLIENT_DISCONNECT;
     }
 
-    public function vpngroup()
+    public function vpnuser()
     {
         return $this->hasOne('App\Entity\VpnUsers', 'login', 'common_name');
+    }
+    public function vpngroup()
+    {
+        return $this->hasOne('App\Entity\VpnGroups', 'id', 'group_id');
     }
 }
