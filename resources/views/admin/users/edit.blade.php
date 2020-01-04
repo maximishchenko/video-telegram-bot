@@ -61,6 +61,7 @@
                 </select>
             </div>
 
+            @if($user->isUser())
 
             <h3 class="text-center">Доступ к группам</h3>
             <hr>
@@ -73,6 +74,8 @@
                     </div>
                 @endforeach
             </div>
+
+            @endif
 
             <hr>
             <div class="form-group text-center">

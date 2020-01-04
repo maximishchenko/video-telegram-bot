@@ -119,10 +119,11 @@ return [
     'dashboard_admin_vpnlogs' => 'Журнал подключений',
     'admin_vpnlogs_id' => 'ID',
     'admin_vpnlogs_common_name' => 'Имя пользователя',
-    'admin_vpnlogs_event' => 'событие',
+    'admin_vpnlogs_event' => 'Событие',
     'admin_vpnlogs_remote_ip' => 'ip-выданный',
     'admin_vpnlogs_request_ip' => 'ip-исходный',
     'admin_vpnlogs_created_at' => 'Время наступления события',
     'client_connected' => 'Подключение',
     'client_disconnected' => 'Отключение',
+    'admin_access_to_all_groups' => 'Администратор имеет доступ ко всем группам',
 ];

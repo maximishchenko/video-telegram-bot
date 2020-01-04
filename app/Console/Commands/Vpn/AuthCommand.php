@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Console\Commands\User;
+namespace App\Console\Commands\Vpn;
 
 use App\Entity\VpnUsers;
 use App\Shared;
@@ -9,7 +9,7 @@ use Illuminate\Console\Command;
 class AuthCommand extends Command
 {
 
-    protected $signature = 'user:auth {login} {password}';
+    protected $signature = 'vpn:auth {login} {password}';
 
     protected $description = 'Check user\'s auth';
 

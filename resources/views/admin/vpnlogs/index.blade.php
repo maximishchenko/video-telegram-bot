@@ -2,6 +2,60 @@
 
 @section('content')
 
+    <div class="card mb-3">
+        <div class="card-header">
+            Filter
+        </div>
+        <div class="card-body">
+            <form action="?" method="GET" autocomplete="off">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="id" class="col-form-label">
+                                {{ trans('messages.admin_vpnlogs_id') }}
+                            </label>
+                            <input placeholder="" id="id" name="id" value="{{ request('id') }}" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="common_name" class="col-form-label">
+                                {{ trans('messages.admin_vpnlogs_common_name') }}
+                            </label>
+                            <input placeholder="" id="common_name" name="common_name" value="{{ request('common_name') }}" class="form-control" type="text">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="event" class="col-form-label">
+                                {{ trans('messages.admin_vpnlogs_event') }}
+                            </label>
+                            <select name="event" id="event" class="form-control">
+                                <option value=""></option>
+                                @foreach(\App\Shared::getEventsArray() as $value => $label)
+                                    <option value="{{ $value }}" {{ $value === request('event') ? ' event' : '' }}>
+                                        {{ $label }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-sm">
+                                {{ trans('messages.btn_search') }}
+                            </button>
+
+                            <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnlogs.index') }}">
+                                {{ trans('messages.cancel_search') }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -22,7 +76,7 @@
                     {{ $log->id }}
                 </td>
                 <td>
-                    {{ $log->common_name }}
+                    {{ $log->vpngroup->name }} ({{ $log->common_name }})
                 </td>
                 <td>
 

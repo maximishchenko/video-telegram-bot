@@ -13,7 +13,7 @@ class CreateLogTable extends Migration
      */
     public function up()
     {
-        Schema::create('openvpn_log', function (Blueprint $table) {
+        Schema::create('vpn_logs', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('common_name');
             $table->string('event');
@@ -30,6 +30,6 @@ class CreateLogTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('openvpn_log');
+        Schema::dropIfExists('vpn_logs');
     }
 }

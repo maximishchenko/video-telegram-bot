@@ -33,8 +33,8 @@ class Shared
     public static function getEventsArray(): array
     {
         return [
-            static::CLIENT_CONNECT => trans('messages.client_connect'),
-            static::CLIENT_DISCONNECT => trans('messages.client_disconnect'),
+            static::CLIENT_CONNECT => trans('messages.client_connected'),
+            static::CLIENT_DISCONNECT => trans('messages.client_disconnected'),
         ];
     }
 

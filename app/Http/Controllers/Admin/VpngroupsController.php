@@ -9,12 +9,14 @@ use App\Http\Requests\Admin\VpnGroups\UpdateRequest;
 use App\Shared;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class VpngroupsController extends Controller
 {
     public function index(Request $request)
     {
         $query = VpnGroups::orderBy('id', 'desc');
+//        $query = VpnGroups::whereIn()->orderBy('id', 'desc');
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);
         }

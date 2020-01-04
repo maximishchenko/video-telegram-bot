@@ -5,7 +5,7 @@
 
         <style>
             .card-lnk {
-                margin: 5rem;
+                margin: 2rem;
                 text-decoration: none;
                 color: #000;
             }
@@ -14,39 +14,50 @@
             }
         </style>
 
-    <div class="col-md-4">
-        <a class="cards-lnk" href="{{ route('admin.users.index') }}">
-        <div class="card mxs-auto">
-            <div class="card-body card-lnk">
-                <blockquote class="blockquote mb-0 text-center">
-                    <p>Управление пользователями системы</p>
-                </blockquote>
+        <div class="col-md-3">
+            <a class="cards-lnk" href="{{ route('admin.users.index') }}">
+            <div class="card mxs-auto">
+                <div class="card-body card-lnk">
+                    <blockquote class="blockquote mb-0 text-center">
+                        <p>Управление пользователями системы</p>
+                    </blockquote>
+                </div>
             </div>
-        </div>
-    </a>
-    </div>
-    <div class="col-md-4">
-        <a class="cards-lnk" href="{{ route('admin.vpngroups.index') }}">
-        <div class="card mxs-auto">
-            <div class="card-body card-lnk">
-                <blockquote class="blockquote mb-0 text-center">
-                    <p>Управление группами пользователей OpenVPN</p>
-                </blockquote>
-            </div>
-        </div>
         </a>
-    </div>
-    <div class="col-md-4">
-        <a class="cards-lnk" href="{{ route('admin.vpnusers.index') }}">
-        <div class="card mxs-auto">
-            <div class="card-body card-lnk">
-                <blockquote class="blockquote mb-0 text-center">
-                    <p>Управление пользователями OpenVPN</p>
-                </blockquote>
-            </div>
         </div>
-        </a>
-    </div>
+        <div class="col-md-3">
+            <a class="cards-lnk" href="{{ route('admin.vpngroups.index') }}">
+            <div class="card mxs-auto">
+                <div class="card-body card-lnk">
+                    <blockquote class="blockquote mb-0 text-center">
+                        <p>Управление группами пользователей OpenVPN</p>
+                    </blockquote>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="cards-lnk" href="{{ route('admin.vpnusers.index') }}">
+            <div class="card mxs-auto">
+                <div class="card-body card-lnk">
+                    <blockquote class="blockquote mb-0 text-center">
+                        <p>Управление пользователями OpenVPN</p>
+                    </blockquote>
+                </div>
+            </div>
+            </a>
+        </div>
+        <div class="col-md-3">
+            <a class="cards-lnk" href="{{ route('admin.vpnlogs.index') }}">
+                <div class="card mxs-auto">
+                    <div class="card-body card-lnk">
+                        <blockquote class="blockquote mb-0 text-center">
+                            <p>Журнал подключений OpenVPN</p>
+                        </blockquote>
+                    </div>
+                </div>
+            </a>
+        </div>
 
     </div>
 

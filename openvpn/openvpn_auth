@@ -6,7 +6,7 @@ $root = "/var/www/html/ag";
 $login = getenv('username');
 $pwd = getenv('password');
 
-$cmd = exec("php $root/artisan user:auth $login $pwd", $o, $v);
+$cmd = exec("php $root/artisan vpn:auth $login $pwd", $o, $v);
 
 if (json_encode($o[0]) == "\"scc\"") {
         echo "user authorized";

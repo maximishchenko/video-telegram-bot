@@ -17,7 +17,7 @@ class UsersController extends Controller
 
     public function __construct()
     {
-        $this->middleware('can:users-manage');
+        $this->middleware('can:admin');
     }
 
     public function index(Request $request)

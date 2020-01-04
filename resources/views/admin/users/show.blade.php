@@ -95,18 +95,16 @@
     </table>
 
 
+    <h3>Доступ к группам</h3>
+    <hr>
 
-    @if (!empty($user->vpngroups))
-
-        <h3>Доступ к группам</h3>
-        <hr>
-
+    @if ($user->isUser())
         <table class="table table-bordered table-striped">
             <thead>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Comment</th>
-                <th>Status</th>
+                <th>{{ trans('messages.admin_vpngroups_id') }}</th>
+                <th>{{ trans('messages.admin_vpngroups_name') }}</th>
+                <th>{{ trans('messages.admin_vpngroups_comment') }}</th>
+                <th>{{ trans('messages.admin_vpngroups_status') }}</th>
             </thead>
             <tbody>
             @foreach($user->vpngroups as $group)
@@ -132,6 +130,10 @@
             @endforeach
             </tbody>
         </table>
+    @endif
+    @if ($user->isAdmin())
+        <hr>
+        {{ trans('messages.admin_access_to_all_groups') }}
     @endif
 
 @endsection
