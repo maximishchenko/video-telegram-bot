@@ -4,6 +4,8 @@
 
     <div class="offset-3 col-md-6">
 
+        <h3 class="text-center">Данные пользователя</h3>
+        <hr>
         <form method="POST" action="{{ route('admin.users.update', $user) }}">
             @csrf
             @method('PUT')
@@ -57,6 +59,19 @@
                         </option>
                     @endforeach
                 </select>
+            </div>
+
+
+            <h3 class="text-center">Доступ к группам</h3>
+            <hr>
+
+            <div class="form-group">
+                @foreach($vpngroups as $groupKey => $vpngroup)
+                    <div>
+                        <input {{ $user->vpngroups->contains($vpngroup->id) ? 'checked' : '' }} type="checkbox" id="{{ $vpngroup->id }}" name="vpngroups[]" value="{{ $vpngroup->id }}">
+                        <label for="{{ $vpngroup->id }}">{{ $vpngroup->name }}</label>
+                    </div>
+                @endforeach
             </div>
 
             <hr>

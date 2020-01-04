@@ -118,9 +118,6 @@
                         @if ($user->isUser())
                             <span class="badge badge-success">{{ trans('roles.user') }}</span>
                         @endif
-                            @if ($user->isManager())
-                                <span class="badge badge-warning">{{ trans('roles.manager') }}</span>
-                            @endif
                     </td>
                     <td>
                         @if ($user->isActive())

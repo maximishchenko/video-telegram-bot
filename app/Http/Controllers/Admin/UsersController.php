@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Entity\User;
+use App\Entity\VpnGroups;
 use App\Http\Requests\Admin\Users\CreateRequest;
 use App\Http\Requests\Admin\Users\PasswordRequest;
 use App\Http\Requests\Admin\Users\UpdateRequest;
@@ -78,12 +79,15 @@ class UsersController extends Controller
 
     public function edit(User $user)
     {
-        return view('admin.users.edit', compact('user'));
+        $vpngroups = VpnGroups::orderBy('name')->where('status', Shared::STATUS_ACTIVE)->get();
+        return view('admin.users.edit', compact('user', 'vpngroups'));
     }
 
     public function update(UpdateRequest $request, User $user)
     {
         $user->update($request->only(['name', 'email', 'status', 'phone', 'role']));
+        $user->vpngroups()->sync( $request['vpngroups'] );
+
         return redirect()->route('admin.users.show', $user);
     }
 

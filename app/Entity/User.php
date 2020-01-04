@@ -82,11 +82,6 @@ class User extends Authenticatable
         return $this->role === Shared::ROLE_USER;
     }
 
-    public function isManager(): bool
-    {
-        return $this->role === Shared::ROLE_MANAGER;
-    }
-
     public function verify(): void
     {
         if (!$this->isWait()) {
@@ -132,5 +127,10 @@ class User extends Authenticatable
             throw new \DomainException('Role is already assigned.');
         }
         $this->update(['role' => $role]);
+    }
+
+    public function vpngroups()
+    {
+        return $this->belongsToMany('\App\Entity\VpnGroups')->withTimestamps();
     }
 }

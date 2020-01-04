@@ -62,4 +62,9 @@ class VpnGroups extends Model
     {
         return $this->hasMany('\App\Entity\VpnUsers', 'group_id', 'id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany('\App\Entity\User')->withTimestamps();
+    }
 }

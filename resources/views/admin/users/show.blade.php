@@ -30,6 +30,10 @@
         </form>
     </div>
 
+
+    <h3>Данные пользователя</h3>
+    <hr>
+
     <table class="table table table-bordered">
         <tbody>
             <tr>
@@ -65,11 +69,6 @@
                             {{ trans('roles.user') }}
                         </span>
                     @endif
-                    @if ($user->isManager())
-                        <span class="badge badge-warning">
-                            {{ trans('roles.manager') }}
-                        </span>
-                    @endif
                 </td>
             </tr>
             <tr>
@@ -94,5 +93,45 @@
             </tr>
         </tbody>
     </table>
+
+
+
+    @if (!empty($user->vpngroups))
+
+        <h3>Доступ к группам</h3>
+        <hr>
+
+        <table class="table table-bordered table-striped">
+            <thead>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Comment</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+            @foreach($user->vpngroups as $group)
+                <tr>
+                    <td>
+                        {{ $group->id }}
+                    </td>
+                    <td>
+                        {{ $group->name }}
+                    </td>
+                    <td>
+                        {{ $group->comment }}
+                    </td>
+                    <td>
+                        @if ($group->isActive())
+                            <span class="badge badge-success">{{ trans('messages.status_active') }}</span>
+                        @endif
+                        @if ($group->isBlocked())
+                            <span class="badge badge-danger">{{ trans('messages.status_blocked') }}</span>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    @endif
 
 @endsection

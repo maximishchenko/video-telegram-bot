@@ -16,15 +16,12 @@ class Shared
 
     public const ROLE_USER = 'user';
 
-    public const ROLE_MANAGER = 'manager';
-
     public const DEFAULT_PAGINATE = 50;
 
     public static function getRolesArray(): array
     {
         return [
             static::ROLE_USER => trans('roles.user'),
-            static::ROLE_MANAGER => trans('roles.manager'),
             static::ROLE_ADMIN => trans('roles.admin'),
         ];
     }
