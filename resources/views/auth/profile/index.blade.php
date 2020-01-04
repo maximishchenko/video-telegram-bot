@@ -62,11 +62,6 @@
                             {{ trans('roles.user') }}
                         </span>
                 @endif
-                @if ($profile->isManager())
-                    <span class="badge badge-warning">
-                            {{ trans('roles.manager') }}
-                        </span>
-                @endif
             </td>
             </td>
         </tr>

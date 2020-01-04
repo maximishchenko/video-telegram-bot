@@ -116,4 +116,13 @@ return [
     'change_password' => 'Смена пароля',
     'to_profile' => 'Перейти в профиль',
     'profile_update' => 'Редактировать профиль',
+    'dashboard_admin_vpnlogs' => 'Журнал подключений',
+    'admin_vpnlogs_id' => 'ID',
+    'admin_vpnlogs_common_name' => 'Имя пользователя',
+    'admin_vpnlogs_event' => 'событие',
+    'admin_vpnlogs_remote_ip' => 'ip-выданный',
+    'admin_vpnlogs_request_ip' => 'ip-исходный',
+    'admin_vpnlogs_created_at' => 'Время наступления события',
+    'client_connected' => 'Подключение',
+    'client_disconnected' => 'Отключение',
 ];

@@ -22,6 +22,11 @@
             {{ trans('messages.dashboard_admin_vpnusers') }}
         </a>
     </li>
+    <li class="nav-item">
+        <a class="nav-link {{ (request()->segment(2) == 'vpnlogs') ? ' active' : '' }}" href="{{ route('admin.vpnlogs.index') }}">
+            {{ trans('messages.dashboard_admin_vpnlogs') }}
+        </a>
+    </li>
 </ul>
 
 @endguest

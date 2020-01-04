@@ -127,3 +127,10 @@ Breadcrumbs::register('admin.vpnusers.edit', function (BreadcrumbsGenerator $cru
     $crumbs->parent('admin.vpnusers.show', $id);
     $crumbs->push(trans('messages.breadcrumbs_admin_vpnusers_update'), route('admin.vpnusers.edit', $group));
 });
+
+
+
+Breadcrumbs::register('admin.vpnlogs.index', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push(trans('messages.dashboard_admin_vpnlogs'), route('admin.vpnlogs.index'));
+});

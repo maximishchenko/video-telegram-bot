@@ -8,6 +8,7 @@ php artisan make:mail Auth\Register\VerifyMail --markdown=mails.auth.register.co
 php artisan make:migration add_user_verificaton --table=users
 
 php artisan tinker
->>> $user = factory(\App\Entity\User::class, 30)->create();
+>>> $user = factory(\App\Entity\User::class, 5)->create();
 >>> $vpngroups = factory(\App\Entity\VpnGroups::class, 30)->create();
 >>> $vpnusers = factory(\App\Entity\VpnUsers::class, 150)->create();
+>>> $events = factory(\App\Entity\VpnLog::class, 150)->create();
