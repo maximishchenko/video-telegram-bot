@@ -71,14 +71,14 @@ class VpnusersController extends Controller
     public function edit($id)
     {
         $user = VpnUsers::findOrFail($id);
-//        $user = $id;
         return view('admin.vpnusers.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $user = VpnUsers::findOrFail($id);
-        $user->update($request->only(['name', 'login', 'comment']));
+//        $user->update($request->only(['name', 'login', 'comment']));
+        $user->update($request->only(['name', 'comment']));
         return redirect()->route('admin.vpnusers.show', $user);
     }
 

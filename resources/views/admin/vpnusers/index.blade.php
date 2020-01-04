@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <h4 class="alert-danger">Запретить редактирование имени пользователя!!!</h4>
+    <h4 class="alert-danger">Добавить cascade delete для группы</h4>
 
     <div class="card mb-3">
         <div class="card-body">
@@ -75,21 +75,21 @@
             {{ trans('messages.admin_btn_create') }}
         </a>
     </div>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered">
         <thead>
         <tr>
-            <td>{{ trans('messages.admin_vpnusers_id') }}</td>
-            <td>{{ trans('messages.admin_vpnusers_name') }}</td>
-            <td>{{ trans('messages.admin_vpnusers_login') }}</td>
-            <td>{{ trans('messages.admin_vpnusers_group_id') }}</td>
-            <td>{{ trans('messages.admin_vpnusers_comment') }}</td>
-            <td>{{ trans('messages.admin_vpnusers_status') }}</td>
+            <th>{{ trans('messages.admin_vpnusers_id') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_name') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_login') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_group_id') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_comment') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_status') }}</th>
         </tr>
         </thead>
         <tbody>
 
         @foreach($users as $user)
-            <tr>
+            <tr class="{{ ($user->group->status == \App\Shared::STATUS_BLOCKED) ? 'alert alert-danger' : '' }}">
                 <td>{{ $user->id }}</td>
                 <td>
                     <a href="{{ route('admin.vpnusers.show', $user) }}">{{ $user->name }}</a>
@@ -101,8 +101,7 @@
 
                     @if ($user->isActive())
                         <span class="badge badge-success">{{ trans('messages.status_active') }}</span>
-                    @endif
-                    @if ($user->isBlocked())
+                    @else
                         <span class="badge badge-danger">{{ trans('messages.status_blocked') }}</span>
                     @endif
                 </td>

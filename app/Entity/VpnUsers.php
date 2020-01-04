@@ -31,7 +31,7 @@ class VpnUsers extends Model
 
     public function isActive()
     {
-        return $this->status === Shared::STATUS_ACTIVE;
+        return ($this->status === Shared::STATUS_ACTIVE && $this->group->status === Shared::STATUS_ACTIVE);
     }
 
 

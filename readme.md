@@ -12,3 +12,8 @@ php artisan tinker
 >>> $vpngroups = factory(\App\Entity\VpnGroups::class, 30)->create();
 >>> $vpnusers = factory(\App\Entity\VpnUsers::class, 150)->create();
 >>> $vpnlogs = factory(\App\Entity\VpnLog::class, 50)->create();
+
+appname
+DOCUMENT_ROOT
+ip
+port

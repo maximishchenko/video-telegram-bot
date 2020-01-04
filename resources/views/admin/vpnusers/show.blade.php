@@ -5,7 +5,6 @@
         .msk{ -webkit-text-security: disc !important; }
     </style>
 
-
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm mr-1">
             {{ trans('messages.admin_vpnusers') }}
@@ -34,6 +33,13 @@
         </form>
     </div>
 
+    @if ($user->group->status == \App\Shared::STATUS_BLOCKED)
+        <div class="alert alert-danger text-center">
+            {{ trans('messages.user_group_locked') }}
+        </div>
+    @endif
+
+
     <div class="row">
         <div class="col-md-6">
 
@@ -53,7 +59,11 @@
         </tr>
         <tr>
             <th>{{ trans('messages.admin_vpnusers_group_id') }}</th>
-            <td>{{ $user->group->name }}</td>
+            <td>
+                <a href="{{ route('admin.vpngroups.show', $user->group->id) }}" target="_blank">
+                    {{ $user->group->name }}
+                </a>
+            </td>
         </tr>
         <tr>
             <th>
@@ -72,8 +82,7 @@
                     <span class="badge badge-success">
                             {{ trans('messages.status_active') }}
                         </span>
-                @endif
-                @if ($user->isBlocked())
+                @else
                     <span class="badge badge-danger">
                             {{ trans('messages.status_blocked') }}
                         </span>
@@ -92,9 +101,15 @@
 
             <table class="table table-striped table-bordered">
                 <tr>
-                    <th>Последнее подключение</th>
-                    <th>Последний выданный ip-адрес</th>
-                    <th>Послений используемый ip-адрес клиента</th>
+                    <th>
+                        {{ trans('messages.last_login') }}
+                    </th>
+                    <th>
+                        {{ trans('messages.last_remote_ip') }}
+                    </th>
+                    <th>
+                        {{ trans('messages.last_request_ip') }}
+                    </th>
                 </tr>
                 <tr>
                     <td>

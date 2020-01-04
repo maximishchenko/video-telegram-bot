@@ -24,18 +24,6 @@
                     <span class="invalid-feedback"><strong>{{ $errors->first('login') }}</strong></span>
                 @endif
             </div>
-            <div class="form-group">
-                <label for="name" class="col-form-label">
-                    {{ trans('messages.admin_vpnusers_comment') }}
-                </label>
-
-                <textarea id="comment" name="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}"  cols="30" rows="5">
-                </textarea>
-                @if ($errors->has('comment'))
-                    <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
-                @endif
-            </div>
-
 
             <div class="form-group">
                 <label for="group_id" class="col-form-label">
@@ -52,6 +40,21 @@
                 </select>
             </div>
 
+
+
+            <div class="form-group">
+                <label for="name" class="col-form-label">
+                    {{ trans('messages.admin_vpnusers_comment') }}
+                </label>
+
+                <textarea id="comment" name="comment" class="form-control{{ $errors->has('comment') ? ' is-invalid' : '' }}"  cols="30" rows="5">
+                </textarea>
+                @if ($errors->has('comment'))
+                    <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
+                @endif
+            </div>
+
+
             <hr>
 
             <div class="form-group text-center">
@@ -59,8 +62,8 @@
                     {{ trans('messages.btn_save') }}
                 </button>
 
-                <a class="btn btn-primary btn-sm" href="{{ route('admin.vpngroups.index') }}">
-                    {{ trans('messages.breadcrumbs_admin_vpngroups') }}
+                <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnusers.index') }}">
+                    {{ trans('messages.admin_vpnusers') }}
                 </a>
             </div>
         </form>

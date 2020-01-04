@@ -4,6 +4,16 @@
 
     <div class="offset-3 col-md-6">
 
+        <h3 class="text-center">
+            {{ $user->name }} ({{ $user->login }})
+        </h3>
+
+        <div class="alert alert-info text-center">
+            В режиме редактирования существующего пользователя недоступно редактирование
+            полей "Имя пользователя" и изменение группы, т.к. отразится на корректности
+            ведения журнала
+        </div>
+
         <form method="POST" action="{{ route('admin.vpnusers.update', $user) }}">
             @csrf
             @method('PUT')
@@ -13,13 +23,6 @@
                 <input id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="name" value="{{ $user->name }}" required>
                 @if ($errors->has('name'))
                     <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="login" class="col-form-label">{{ trans('messages.admin_vpnusers_login') }}</label>
-                <input id="login" class="form-control{{ $errors->has('login') ? ' is-invalid' : '' }}" type="text" name="login" value="{{ $user->login }}" required>
-                @if ($errors->has('login'))
-                    <span class="invalid-feedback"><strong>{{ $errors->first('login') }}</strong></span>
                 @endif
             </div>
             <div class="form-group">

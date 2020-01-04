@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\Vpn;
 
+use App\Entity\VpnGroups;
 use App\Entity\VpnUsers;
 use App\Shared;
 use Illuminate\Console\Command;
@@ -28,6 +29,13 @@ class AuthCommand extends Command
             ['status', Shared::STATUS_ACTIVE],
             ['login', $login]
         ])->first()) {
+            $this->error("error");
+            return false;
+        }
+
+        $group = VpnGroups::where('id',$user->group_id)->first();
+
+        if ($group->status == Shared::STATUS_BLOCKED) {
             $this->error("error");
             return false;
         }
