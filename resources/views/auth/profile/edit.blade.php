@@ -4,7 +4,7 @@
 
     <div class="offset-3 col-md-6">
 
-        <form method="POST" action="{{ route('admin.users.update', $user) }}">
+        <form method="POST" action="{{ route('profile.update', ['id' => $user]) }}">
             @csrf
             @method('PUT')
 
@@ -13,13 +13,6 @@
                 <input id="name" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" type="text" name="name" value="{{ $user->name }}" required>
                 @if ($errors->has('name'))
                     <span class="invalid-feedback"><strong>{{ $errors->first('name') }}</strong></span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="username" class="col-form-label">{{ trans('messages.admin_users_username') }}</label>
-                <input id="username" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" type="text" name="username" value="{{ $user->username }}" required>
-                @if ($errors->has('username'))
-                    <span class="invalid-feedback"><strong>{{ $errors->first('username') }}</strong></span>
                 @endif
             </div>
             <div class="form-group">
@@ -45,31 +38,13 @@
                 @endif
             </div>
 
-            <div class="form-group">
-                <label for="role" class="col-form-label">
-                    {{ trans('messages.admin_users_role') }}
-                </label>
-
-                <select class="form-control{{ $errors->has('role') ? ' is-invalid' : '' }}" name="role" id="role">
-                    @foreach(\App\Shared::getRolesArray() as $value => $label)
-                        <option value="{{ $value }}"{{ $value === old('role', $user->role) ? 'selected' : '' }}>
-                            {{ $label }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-
             <hr>
             <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary btn-sm">
                     {{ trans('messages.btn_save') }}
                 </button>
-
-                <a href="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm">
-                    {{ trans('messages.breadcrumbs_admin_users') }}
-                </a>
-                <a href="{{ route('admin.users.show', $user) }}" class="btn btn-primary btn-sm">
-                    {{ trans('messages.to_view') }}
+                <a href="{{ route('profile') }}" class="btn btn-primary btn-sm">
+                    {{ trans('messages.to_profile') }}
                 </a>
             </div>
         </form>

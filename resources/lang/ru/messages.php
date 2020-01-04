@@ -110,4 +110,10 @@ return [
     'vpnusers'  => 'Клиенты',
     'admin_vpnusers_group' => 'Группа клиентов',
     'admin_vpnusers_group_id' => 'Группа клиентов',
+    'toggle_pwd' => 'Показать/Скрыть пароль',
+    'menu_link_profile' => 'Профиль',
+    'breadcrumbs_profile' => 'Профиль',
+    'change_password' => 'Смена пароля',
+    'to_profile' => 'Перейти в профиль',
+    'profile_update' => 'Редактировать профиль',
 ];

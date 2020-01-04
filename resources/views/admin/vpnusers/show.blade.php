@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.vpnusers._nav')
     <style>
         .msk{ -webkit-text-security: disc !important; }
     </style>
@@ -58,7 +57,7 @@
             </th>
             <td>
                 <span id="msk" class="msk">{{ $user->password_plain }}</span>
-                &nbsp; <input id="togglepwd" type="checkbox" onchange="window.pwd('msk', 'msk')">&nbsp; Show Password
+                &nbsp; <input id="togglepwd" type="checkbox" onchange="window.pwd('msk', 'msk')">&nbsp; {{ trans('messages.toggle_pwd') }}
 
             </td>
         </tr>

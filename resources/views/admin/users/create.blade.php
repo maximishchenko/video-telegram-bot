@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.users._nav')
 
     <div class="offset-3 col-md-6">
     <form method="POST" action="{{ route('admin.users.store') }}">

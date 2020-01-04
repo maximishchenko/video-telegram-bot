@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.vpngroups._nav')
 
     <div class="offset-3 col-md-6">
 

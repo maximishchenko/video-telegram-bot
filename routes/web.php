@@ -1,12 +1,15 @@
 <?php
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'Admin\HomeController@index')->name('home');
+
+Route::get('/profile', 'Auth\ProfileController@index')->name('profile');
+Route::get('/profile/password', 'Auth\ProfileController@password')->name('profile.password');
+Route::get('/profile/edit', 'Auth\ProfileController@edit')->name('profile.edit');
+Route::put('/profile/update', 'Auth\ProfileController@update')->name('profile.update');
 
 Auth::routes();
 
 Route::get('/verify/{token}', 'Auth\RegisterController@verify')->name('register.verify');
-
-Route::get('/cabinet', 'Cabinet\HomeController@index')->name('cabinet');
 
 Route::group(
     [

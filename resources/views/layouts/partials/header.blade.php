@@ -9,23 +9,21 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
 
                 </ul>
 
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
-                    <!-- Authentication Links -->
                     @guest
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{trans('messages.menu_link_login') }}</a>
-                        </li>
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ trans('messages.menu_link_register') }}</a>
-                            </li>
-                        @endif
+{{--                        <li class="nav-item">--}}
+{{--                            <a class="nav-link" href="{{ route('login') }}">{{trans('messages.menu_link_login') }}</a>--}}
+{{--                        </li>--}}
+{{--                        @if (Route::has('register'))--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a class="nav-link" href="{{ route('register') }}">{{ trans('messages.menu_link_register') }}</a>--}}
+{{--                            </li>--}}
+{{--                        @endif--}}
                     @else
                         <li class="nav-item dropdown">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -33,8 +31,7 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('admin.home') }}"> {{ trans('messages.menu_link_admin') }} </a>
-                                <a class="dropdown-item" href="{{ route('cabinet') }}"> {{ trans('messages.menu_link_cabinet') }} </a>
+                                <a class="dropdown-item" href="{{ route('profile') }}"> {{ trans('messages.menu_link_profile') }} </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                          document.getElementById('logout-form').submit();">

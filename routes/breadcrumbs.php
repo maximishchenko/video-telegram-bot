@@ -30,9 +30,21 @@ Breadcrumbs::register('password.reset', function (BreadcrumbsGenerator $crumbs, 
     $crumbs->push(trans('messages.breadcrumbs_newpwd'), route('password.request', ['token' => $token]));
 });
 
-Breadcrumbs::register('cabinet', function (BreadcrumbsGenerator $crumbs) {
+Breadcrumbs::register('profile', function (BreadcrumbsGenerator $crumbs) {
     $crumbs->parent('home');
-    $crumbs->push(trans('messages.breadcrumbs_cabinet'), route('cabinet'));
+    $crumbs->push(trans('messages.breadcrumbs_profile'), route('profile'));
+});
+Breadcrumbs::register('profile.password', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('profile');
+    $crumbs->push(trans('messages.admin_btn_password'), route('profile.password'));
+});
+Breadcrumbs::register('profile.update', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('profile');
+    $crumbs->push(trans('messages.admin_btn_password'), route('profile.update'));
+});
+Breadcrumbs::register('profile.edit', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('profile');
+    $crumbs->push(trans('messages.admin_btn_password'), route('profile.edit'));
 });
 Breadcrumbs::register('admin.home', function (BreadcrumbsGenerator $crumbs) {
     $crumbs->parent('home');

@@ -23,6 +23,7 @@
             @section('breadcrumbs', Breadcrumbs::render())
             @yield('breadcrumbs')
             @include('flash::message')
+            @include('layouts.partials.tabs')
             @yield('content')
         </div>
     </main>

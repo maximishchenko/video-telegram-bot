@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('admin.users._nav')
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm mr-1">

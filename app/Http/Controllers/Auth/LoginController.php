@@ -19,7 +19,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/cabinet';
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -57,7 +57,7 @@ class LoginController extends Controller
                 flash(trans('messages.flash_need_email_confirm_account'))->error();
                 return back();
             }
-            return redirect()->intended(route('cabinet'));
+            return redirect()->intended(route('admin.home'));
         }
 
         $this->incrementLoginAttempts($request);
