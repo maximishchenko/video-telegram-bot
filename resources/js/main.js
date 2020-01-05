@@ -39,3 +39,14 @@ window.pwd = function (inputID, classID) {
     }
 
 }
+
+
+window.pager = function (name, value) {
+    var url = new URL(window.location.href);
+    var query_string = url.search;
+    var search_params = new URLSearchParams(query_string);
+    search_params.set(name, value);
+    url.search = search_params.toString();
+    var new_url = url.toString();
+    window.location.href = new_url;
+}

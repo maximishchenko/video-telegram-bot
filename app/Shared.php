@@ -16,6 +16,12 @@ class Shared
 
     public const ROLE_USER = 'user';
 
+    public const PAGER_20 = 20;
+
+    public const PAGER_50 = 50;
+
+    public const PAGER_100 = 100;
+
     public const CLIENT_CONNECT = 'client-connect';
 
     public const CLIENT_DISCONNECT = 'client-disconnect';
@@ -79,6 +85,14 @@ class Shared
         return [
             static::STATUS_ACTIVE => trans('roles.active'),
             static::STATUS_BLOCKED => trans('roles.blocked'),
+        ];
+    }
+
+    public static function getPagersArray() {
+        return [
+            static::PAGER_20 => 20,
+            static::PAGER_50 => 50,
+            static::PAGER_100 => 100,
         ];
     }
 

@@ -53,7 +53,11 @@ class UsersController extends Controller
             $query->where('status', $value);
         }
 
-        $users = $query->paginate(Shared::DEFAULT_PAGINATE);
+        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
+            $users = $query->paginate($value);
+        } else {
+            $users = $query->paginate(Shared::DEFAULT_PAGINATE);
+        }
         return view('admin.users.index', compact('users'));
     }
 

@@ -61,6 +61,25 @@
         </div>
     </div>
 
+    <div class="row">
+        <div class="col-sm-2">
+            <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
+                <option value="" disabled selected>
+                    {{ trans('messages.pager_count_elements') }}
+                </option>
+                <option value=""></option>
+                @foreach(\App\Shared::getPagersArray() as $value => $label)
+                    <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="text-right">
+        <b>{{ trans('messages.count_grid', ['count' => $logs->count(), 'total' => $logs->total()]) }}</b>
+    </div>
 
     <table class="table table-bordered table-striped">
         <thead>

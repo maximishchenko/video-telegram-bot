@@ -14,7 +14,7 @@ $factory->define(VpnLog::class, function (Faker $faker) {
     $user_id = VpnUsers::where('login',$common_name)->first();
     $group = VpnGroups::where('id',$user_id->group_id)->first();
 
-    $eventsArray = array_keys(Shared::getEventsArray());
+    $eventsArray = [Shared::CLIENT_CONNECT, Shared::CLIENT_DISCONNECT];
     $event = $faker->randomElement($eventsArray);
 
     $request_ip = ($event == Shared::CLIENT_CONNECT) ? $faker->localIpv4 : null;

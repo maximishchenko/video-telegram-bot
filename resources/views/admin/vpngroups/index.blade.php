@@ -54,13 +54,30 @@
         </div>
     </div>
 
-    @can('admin')
     <div class="d-flex flex-row mb-3">
+        @can('admin')
         <a href="{{ route('admin.vpngroups.create') }}" class="btn btn-primary btn-sm mr-1">
             {{ trans('messages.admin_btn_create') }}
         </a>
+        @endcan
+        <div class="col-sm-2">
+            <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
+                <option value="" disabled selected>
+                    {{ trans('messages.pager_count_elements') }}
+                </option>
+                <option value=""></option>
+                @foreach(\App\Shared::getPagersArray() as $value => $label)
+                    <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
     </div>
-    @endcan
+
+    <div class="text-right">
+        <b>{{ trans('messages.count_grid', ['count' => $groups->count(), 'total' => $groups->total()]) }}</b>
+    </div>
 
     <table class="table table-bordered table-striped">
         <thead>

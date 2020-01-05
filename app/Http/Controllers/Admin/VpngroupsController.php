@@ -42,7 +42,12 @@ class VpngroupsController extends Controller
         if (!empty($value = $request->get('status'))) {
             $query->where('status', $value);
         }
-        $groups = $query->paginate(Shared::DEFAULT_PAGINATE);
+
+        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
+            $groups = $query->paginate($value);
+        } else {
+            $groups = $query->paginate(Shared::DEFAULT_PAGINATE);
+        }
         return view('admin.vpngroups.index', compact('groups'));
     }
 

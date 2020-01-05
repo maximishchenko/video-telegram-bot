@@ -41,7 +41,11 @@ class VpnLogController extends Controller
             $query->where('event', $value);
         }
 
-        $logs = $query->paginate(Shared::DEFAULT_PAGINATE);
+        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
+            $logs = $query->paginate($value);
+        } else {
+            $logs = $query->paginate(Shared::DEFAULT_PAGINATE);
+        }
         return view('admin.vpnlogs.index', compact('logs'));
     }
 }

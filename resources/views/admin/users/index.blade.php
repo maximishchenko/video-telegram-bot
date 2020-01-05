@@ -86,17 +86,33 @@
         <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm mr-1">
             {{ trans('messages.admin_btn_create') }}
         </a>
+        <div class="col-sm-2">
+            <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
+                <option value="" disabled selected>
+                    {{ trans('messages.pager_count_elements') }}
+                </option>
+                <option value=""></option>
+                @foreach(\App\Shared::getPagersArray() as $value => $label)
+                    <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
+                        {{ $label }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+    <div class="text-right">
+        <b>{{ trans('messages.count_grid', ['count' => $users->count(), 'total' => $users->total()]) }}</b>
     </div>
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <td>{{ trans('messages.admin_users_id') }}</td>
-                <td>{{ trans('messages.admin_users_name') }}</td>
-                <td>{{ trans('messages.admin_users_username') }}</td>
-                <td>{{ trans('messages.admin_users_email') }}</td>
-                <td>{{ trans('messages.admin_users_phone') }}</td>
-                <td>{{ trans('messages.admin_users_role') }}</td>
-                <td>{{ trans('messages.admin_users_status') }}</td>
+                <th>{{ trans('messages.admin_users_id') }}</th>
+                <th>{{ trans('messages.admin_users_name') }}</th>
+                <th>{{ trans('messages.admin_users_username') }}</th>
+                <th>{{ trans('messages.admin_users_email') }}</th>
+                <th>{{ trans('messages.admin_users_phone') }}</th>
+                <th>{{ trans('messages.admin_users_role') }}</th>
+                <th>{{ trans('messages.admin_users_status') }}</th>
             </tr>
         </thead>
         <tbody>

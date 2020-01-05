@@ -150,4 +150,7 @@ return [
     'event_client_blocked' => 'Пользователь заблокирован',
     'event_client_group_blocked' => 'Группа заблокирована',
     'event_client_password_error' => 'Некорректный пароль',
+    'count_grid' => 'Записей :count из :total',
+    'pager_count_elements' => 'Кол-во элементов',
+
 ];
