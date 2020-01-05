@@ -86,10 +86,14 @@
                     {{ $log->common_name }}
                 </td>
                 <td>
-                    {{ $log->name }}
+                    @if ($log->name !== 'null')
+                        {{ $log->name }}
+                    @endif
                 </td>
                 <td>
-                    {{ $log->group }}
+                    @if ($log->group !== 'null')
+                        {{ $log->group }}
+                    @endif
                 </td>
                 <td>
 
@@ -97,7 +101,19 @@
                         <span class="badge badge-success">{{ trans('messages.client_connected') }}</span>
                     @endif
                     @if ($log->disconnected())
-                        <span class="badge badge-danger">{{ trans('messages.client_disconnected') }}</span>
+                        <span class="badge badge-warning">{{ trans('messages.client_disconnected') }}</span>
+                    @endif
+                    @if ($log->loginIncorrect())
+                            <span class="badge badge-danger">{{ trans('messages.event_client_login_not_found') }}</span>
+                    @endif
+                    @if ($log->loginBlocked())
+                        <span class="badge badge-danger">{{ trans('messages.event_client_blocked') }}</span>
+                    @endif
+                    @if ($log->groupBlocked())
+                        <span class="badge badge-danger">{{ trans('messages.event_client_group_blocked') }}</span>
+                    @endif
+                    @if ($log->passwordError())
+                        <span class="badge badge-danger">{{ trans('messages.event_client_password_error') }}</span>
                     @endif
                 </td>
                 <td>

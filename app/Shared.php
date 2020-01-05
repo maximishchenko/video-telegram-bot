@@ -20,6 +20,17 @@ class Shared
 
     public const CLIENT_DISCONNECT = 'client-disconnect';
 
+    public const CLIENT_LOGIN_NOT_FOUND = 'client-login-incorrect';
+
+    public const CLIENT_BLOCKED = 'client-blocked';
+
+    public const CLIENT_GROUP_BLOCKED = 'client-group-blocked';
+
+    public const CLIENT_PASSWORD_ERROR = 'cient-password-error';
+
+
+//
+
     public const CLIENT_CONNECTED = 'connected';
 
     public const CLIENT_DISCONNECTED = 'disconnected';
@@ -39,6 +50,10 @@ class Shared
         return [
             static::CLIENT_CONNECT => trans('messages.client_connected'),
             static::CLIENT_DISCONNECT => trans('messages.client_disconnected'),
+            static::CLIENT_LOGIN_NOT_FOUND => trans('messages.event_client_login_not_found'),
+            static::CLIENT_BLOCKED => trans('messages.event_client_blocked'),
+            static::CLIENT_GROUP_BLOCKED => trans('messages.event_client_group_blocked'),
+            static::CLIENT_PASSWORD_ERROR => trans('messages.event_client_password_error'),
         ];
     }
 

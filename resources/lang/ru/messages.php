@@ -146,4 +146,8 @@ return [
     'dashboard_manage_vpn_users' => 'Управление пользователями OpenVPN',
     'dashboard_manage_vpn_log' => 'Журнал подключений OpenVPN',
     'dashboard_manage_system_users' => 'Управление пользователями системы',
+    'event_client_login_not_found' => 'Пользователь не существует',
+    'event_client_blocked' => 'Пользователь заблокирован',
+    'event_client_group_blocked' => 'Группа заблокирована',
+    'event_client_password_error' => 'Некорректный пароль',
 ];

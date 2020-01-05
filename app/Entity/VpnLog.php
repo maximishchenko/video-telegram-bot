@@ -23,6 +23,26 @@ class VpnLog extends Model
         return $this->event === Shared::CLIENT_DISCONNECT;
     }
 
+    public function loginIncorrect()
+    {
+        return $this->event === Shared::CLIENT_LOGIN_NOT_FOUND;
+    }
+
+    public function loginBlocked()
+    {
+        return $this->event === Shared::CLIENT_BLOCKED;
+    }
+
+    public function groupBlocked()
+    {
+        return $this->event === Shared::CLIENT_GROUP_BLOCKED;
+    }
+
+    public function passwordError()
+    {
+        return $this->event === Shared::CLIENT_PASSWORD_ERROR;
+    }
+
     public function vpnuser()
     {
         return $this->hasOne('App\Entity\VpnUsers', 'login', 'common_name');
