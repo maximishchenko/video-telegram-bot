@@ -15,23 +15,30 @@
             }
         </style>
 
+        @can('admin')
         <div class="col-md-3">
             <a class="cards-lnk" href="{{ route('admin.users.index') }}">
             <div class="card mxs-auto">
                 <div class="card-body card-lnk">
                     <blockquote class="blockquote mb-0 text-center">
-                        <p>Управление пользователями системы</p>
+                        <p>
+                            {{ trans('messages.dashboard_manage_system_users') }}
+                        </p>
                     </blockquote>
                 </div>
             </div>
         </a>
         </div>
+        @endcan
+        @can('display_clients')
         <div class="col-md-3">
             <a class="cards-lnk" href="{{ route('admin.vpngroups.index') }}">
             <div class="card mxs-auto">
                 <div class="card-body card-lnk">
                     <blockquote class="blockquote mb-0 text-center">
-                        <p>Управление группами пользователей OpenVPN</p>
+                        <p>
+                            {{ trans('messages.dashboard_manage_vpn_groups') }}
+                        </p>
                     </blockquote>
                 </div>
             </div>
@@ -42,7 +49,9 @@
             <div class="card mxs-auto">
                 <div class="card-body card-lnk">
                     <blockquote class="blockquote mb-0 text-center">
-                        <p>Управление пользователями OpenVPN</p>
+                        <p>
+                            {{ trans('messages.dashboard_manage_vpn_users') }}
+                        </p>
                     </blockquote>
                 </div>
             </div>
@@ -53,12 +62,15 @@
                 <div class="card mxs-auto">
                     <div class="card-body card-lnk">
                         <blockquote class="blockquote mb-0 text-center">
-                            <p>Журнал подключений OpenVPN</p>
+                            <p>
+                                {{ trans('messages.dashboard_manage_vpn_log') }}
+                            </p>
                         </blockquote>
                     </div>
                 </div>
             </a>
         </div>
+        @endcan
 
     </div>
 

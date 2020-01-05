@@ -67,8 +67,8 @@ class UsersController extends Controller
         $user = User::new(
             $request['name'],
             $request['username'],
-            $request['phone'],
-            $request['email']
+            $request['email'],
+            $request['phone']
         );
         return redirect()->route('admin.users.show', $user);
     }

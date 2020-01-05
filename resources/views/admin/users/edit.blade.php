@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label for="phone" class="col-form-label">{{ trans('messages.admin_users_phone') }}</label>
-                <input id="phone" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" type="text" name="phone" value="{{ $user->phone }}" required>
+                <input id="phone" class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" type="text" name="phone" value="{{ $user->phone }}" required>
                 @if ($errors->has('phone'))
                     <span class="invalid-feedback"><strong>{{ $errors->first('phone') }}</strong></span>
                 @endif

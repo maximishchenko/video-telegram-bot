@@ -14,6 +14,7 @@
         </a>
     </li>
     @endcan
+    @can('display_clients')
     <li class="nav-item">
         <a class="nav-link {{ (request()->segment(2) == 'vpngroups') ? ' active' : '' }}" href="{{ route('admin.vpngroups.index') }}">
             {{ trans('messages.dashboard_admin_vpngroups') }}
@@ -29,6 +30,7 @@
             {{ trans('messages.dashboard_admin_vpnlogs') }}
         </a>
     </li>
+    @endcan
 </ul>
 
 @endguest

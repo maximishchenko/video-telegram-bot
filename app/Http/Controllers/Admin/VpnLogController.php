@@ -8,12 +8,23 @@ use App\Entity\VpnUsers;
 use App\Shared;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class VpnLogController extends Controller
 {
     public function index(Request $request)
     {
-        $query = VpnLog::orderBy('id', 'desc');
+        if (Auth::user()->can('admin')) {
+            $query = VpnLog::orderBy('id', 'desc');
+        } else {
+            $groupIds = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if (empty($groupIds)) {
+                abort(403);
+            }
+            $groupNames = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->pluck('name')->toArray();
+            $query = VpnLog::whereIn('group', $groupNames);
+        }
+
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);
         }
