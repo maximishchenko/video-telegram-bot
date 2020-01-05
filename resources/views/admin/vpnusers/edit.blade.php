@@ -9,9 +9,7 @@
         </h3>
 
         <div class="alert alert-info text-center">
-            В режиме редактирования существующего пользователя недоступно редактирование
-            полей "Имя пользователя" и изменение группы, т.к. отразится на корректности
-            ведения журнала
+            {{ trans('messages.edit_vpnuser_msg') }}
         </div>
 
         <form method="POST" action="{{ route('admin.vpnusers.update', $user) }}">

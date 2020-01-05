@@ -17,3 +17,6 @@ appname
 DOCUMENT_ROOT
 ip
 port
+
+
+{{ print_r(Auth::user()->vpngroups()->allRelatedIds()->toArray()) }}

@@ -5,11 +5,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header text-center">
-                        <h3>{{ trans('messages.change_password') }}</h3>
-                    </div>
 
                     <div class="card-body">
+                        <div class="text-center">
+                            <h3>{{ trans('messages.change_password') }}</h3>
+                        </div>
+                        <hr>
                         <form method="POST" action="{{ route('admin.users.setpassword', $user) }}">
                             @csrf
 

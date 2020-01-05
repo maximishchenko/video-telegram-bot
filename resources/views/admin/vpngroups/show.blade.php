@@ -19,13 +19,15 @@
             </button>
         </form>
 
-        <form method="post" action="{{ route('admin.vpngroups.update', $group) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.delete_confirm') }} ');">
+        @can('admin')
+        <form method="post" action="{{ route('admin.vpngroups.update', $group) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.admin_btn_delete_cascade_vpnusers') }} ');">
             @csrf
             @method('DELETE')
             <button class="btn btn-primary btn-sm">
                 {{ trans('messages.admin_btn_delete') }}
             </button>
         </form>
+        @endcan
     </div>
 
     <table class="table table table-bordered">

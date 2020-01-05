@@ -107,10 +107,13 @@ Breadcrumbs::register('admin.vpnusers.index', function (BreadcrumbsGenerator $cr
     $crumbs->parent('admin.home');
     $crumbs->push(trans('messages.vpnusers'), route('admin.vpnusers.index'));
 });
+Breadcrumbs::register('admin.vpnusers.status', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.vpnusers.index');
+    $crumbs->push(trans('messages.admin_vpnusers_connect_status'), route('admin.vpnusers.status'));
+});
 
 Breadcrumbs::register('admin.vpnusers.password', function (BreadcrumbsGenerator $crumbs, $id) {
-    $user = VpnUsers::findOrFail($id);
-//    $crumbs->parent('admin.vpnusers.show', ['id' => $id]);
+    $crumbs->parent('admin.vpnusers.index');
     $crumbs->push(trans('messages.admin_btn_password'), route('admin.vpnusers.password', ['id' => $id]));
 });
 Breadcrumbs::register('admin.vpnusers.create', function (BreadcrumbsGenerator $crumbs) {

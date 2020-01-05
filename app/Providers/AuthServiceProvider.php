@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use App\Entity\User;
+use App\Entity\VpnGroups;
+use App\Entity\VpnUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -28,6 +31,28 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('admin', function(User $user) {
             return $user->isAdmin();
+        });
+
+        Gate::define('group_access', function(User $user, VpnGroups $group) {
+            $userGroups = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if ($user->isAdmin()) {
+                return true;
+            }
+            if (in_array($group->id, $userGroups)) {
+                return true;
+            }
+            return false;
+        });
+
+        Gate::define('client_access', function(User $user, VpnUsers $client) {
+            $userGroups = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if ($user->isAdmin()) {
+                return true;
+            }
+            if (in_array($client->group_id, $userGroups)) {
+                return true;
+            }
+            return false;
         });
     }
 }

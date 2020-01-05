@@ -11,7 +11,8 @@ use Faker\Generator as Faker;
 $factory->define(VpnUsers::class, function (Faker $faker) {
     $password = Str::random(8);
     $active = $faker->boolean;
-    $groups = VpnGroups::where('status',Shared::STATUS_ACTIVE)->pluck('id')->toArray();
+    $groups = VpnGroups::all()->pluck('id')->toArray();
+//    $groups = VpnGroups::where('status',Shared::STATUS_ACTIVE)->pluck('id')->toArray();
     return [
         'name' => $faker->name,
         'login' => $faker->unique()->userName,
@@ -20,5 +21,6 @@ $factory->define(VpnUsers::class, function (Faker $faker) {
         'status' => $active ? Shared::STATUS_ACTIVE : Shared::STATUS_BLOCKED,
         'comment' => $faker->text,
         'group_id' => $faker->randomElement($groups),
+        'connect_status' => Shared::CLIENT_DISCONNECTED
     ];
 });

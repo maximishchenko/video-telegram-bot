@@ -24,6 +24,7 @@
             </button>
         </form>
 
+        @can('admin')
         <form method="post" action="{{ route('admin.vpnusers.update', $user) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.delete_confirm') }} ');">
             @csrf
             @method('DELETE')
@@ -31,6 +32,7 @@
                 {{ trans('messages.admin_btn_delete') }}
             </button>
         </form>
+        @endcan
     </div>
 
     @if ($user->group->status == \App\Shared::STATUS_BLOCKED)
@@ -116,21 +118,21 @@
                         @if(isset($lastLog->created_at))
                             {{ $lastLog->created_at }} <br>
                         @else
-                            никогда <br>
+                            {{ trans('messages.never_msg') }} <br>
                         @endif
                     </td>
                     <td>
                         @if(isset($lastLog->remote_ip))
                             {{ $lastLog->remote_ip }} <br>
                         @else
-                            никогда <br>
+                            {{ trans('messages.never_msg') }} <br>
                         @endif
                     </td>
                     <td>
                         @if (isset($lastLog->request_ip))
                             {{ $lastLog->request_ip }} <br>
                         @else
-                            никогда <br>
+                            {{ trans('messages.never_msg') }} <br>
                         @endif
                     </td>
                 </tr>

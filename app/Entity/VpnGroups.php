@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Shared;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Gate;
 
 class VpnGroups extends Model
 {
@@ -66,5 +67,13 @@ class VpnGroups extends Model
     public function users()
     {
         return $this->belongsToMany('\App\Entity\User')->withTimestamps();
+    }
+
+
+    public function checkGroupAccess()
+    {
+        if (Gate::denies('group_access', $this)) {
+            abort(403);
+        }
     }
 }

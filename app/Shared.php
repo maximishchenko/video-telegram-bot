@@ -20,6 +20,10 @@ class Shared
 
     public const CLIENT_DISCONNECT = 'client-disconnect';
 
+    public const CLIENT_CONNECTED = 'connected';
+
+    public const CLIENT_DISCONNECTED = 'disconnected';
+
     public const DEFAULT_PAGINATE = 50;
 
     public static function getRolesArray(): array
@@ -35,6 +39,14 @@ class Shared
         return [
             static::CLIENT_CONNECT => trans('messages.client_connected'),
             static::CLIENT_DISCONNECT => trans('messages.client_disconnected'),
+        ];
+    }
+
+    public static function getConnectionStatusesArray(): array
+    {
+        return [
+            static::CLIENT_CONNECTED => trans('messages.status_conneted'),
+            static::CLIENT_DISCONNECTED => trans('messages.status_disconnected'),
         ];
     }
 

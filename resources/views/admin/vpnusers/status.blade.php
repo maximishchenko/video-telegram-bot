@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <div class="card mb-3">
         <div class="card-body">
             <form action="?" method="GET" autocomplete="off">
@@ -39,13 +40,13 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <label for="status" class="col-form-label">
+                            <label for="connect_status" class="col-form-label">
                                 {{ trans('messages.admin_users_status') }}
                             </label>
-                            <select name="status" id="status" class="form-control">
+                            <select name="connect_status" id="connect_status" class="form-control">
                                 <option value=""></option>
-                                @foreach(\App\Shared::getShortStatusesArray() as $value => $label)
-                                    <option value="{{ $value }}" {{ $value === request('status') ? ' selected' : '' }}>
+                                @foreach(\App\Shared::getConnectionStatusesArray() as $value => $label)
+                                    <option value="{{ $value }}" {{ $value === request('connect_status') ? ' selected' : '' }}>
                                         {{ $label }}
                                     </option>
                                 @endforeach
@@ -58,7 +59,7 @@
                                 {{ trans('messages.btn_search') }}
                             </button>
 
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnusers.index') }}">
+                            <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnusers.status') }}">
                                 {{ trans('messages.cancel_search') }}
                             </a>
                         </div>
@@ -69,13 +70,11 @@
     </div>
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.vpnusers.create') }}" class="btn btn-primary btn-sm mr-1">
-            {{ trans('messages.admin_btn_create') }}
-        </a>
-        <a href="{{ route('admin.vpnusers.status') }}" class="btn btn-primary btn-sm mr-1">
-            {{ trans('messages.admin_vpnusers_connect_status') }}
+        <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm mr-1">
+            {{ trans('messages.dashboard_admin_vpnusers') }}
         </a>
     </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -83,27 +82,24 @@
             <th>{{ trans('messages.admin_vpnusers_name') }}</th>
             <th>{{ trans('messages.admin_vpnusers_login') }}</th>
             <th>{{ trans('messages.admin_vpnusers_group_id') }}</th>
-            <th>{{ trans('messages.admin_vpnusers_comment') }}</th>
-            <th>{{ trans('messages.admin_vpnusers_status') }}</th>
+            <th>{{ trans('messages.admin_vpnusers_connect_status') }}</th>
         </tr>
         </thead>
         <tbody>
 
         @foreach($users as $user)
-            <tr class="{{ ($user->group->status == \App\Shared::STATUS_BLOCKED) ? 'alert alert-danger' : '' }}">
+            <tr>
                 <td>{{ $user->id }}</td>
-                <td>
-                    <a href="{{ route('admin.vpnusers.show', $user) }}">{{ $user->name }}</a>
-                </td>
+                <td>{{ $user->name }}</td>
                 <td>{{ $user->login }}</td>
                 <td>{{ $user->group->name }}</td>
-                <td>{{ $user->comment }}</td>
                 <td>
 
-                    @if ($user->isActive())
-                        <span class="badge badge-success">{{ trans('messages.status_active') }}</span>
-                    @else
-                        <span class="badge badge-danger">{{ trans('messages.status_blocked') }}</span>
+                    @if ($user->isConnected())
+                        <span class="badge badge-success">{{ trans('messages.status_conneted') }}</span>
+                    @endif
+                    @if ($user->isDisconnected())
+                        <span class="badge badge-danger">{{ trans('messages.status_disconnected') }}</span>
                     @endif
                 </td>
 

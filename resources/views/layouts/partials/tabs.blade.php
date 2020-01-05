@@ -7,11 +7,13 @@
             {{ trans('messages.dashboard') }}
         </a>
     </li>
+    @can('admin')
     <li class="nav-item">
         <a class="nav-link {{ (request()->segment(2) == 'users') ? ' active' : '' }}" href="{{ route('admin.users.index') }}">
             {{ trans('messages.dashboard_admin_users') }}
         </a>
     </li>
+    @endcan
     <li class="nav-item">
         <a class="nav-link {{ (request()->segment(2) == 'vpngroups') ? ' active' : '' }}" href="{{ route('admin.vpngroups.index') }}">
             {{ trans('messages.dashboard_admin_vpngroups') }}

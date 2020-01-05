@@ -2,8 +2,9 @@
 
 @section('content')
 
+
     <div class="card mb-3">
-        <div class="card-body">
+        <div class="card-body" id="vpngroups-search">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
                     <div class="col-sm-4">
@@ -53,18 +54,21 @@
         </div>
     </div>
 
+    @can('admin')
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpngroups.create') }}" class="btn btn-primary btn-sm mr-1">
             {{ trans('messages.admin_btn_create') }}
         </a>
     </div>
+    @endcan
+
     <table class="table table-bordered table-striped">
         <thead>
         <tr>
-            <td>{{ trans('messages.admin_vpngroups_id') }}</td>
-            <td>{{ trans('messages.admin_vpngroups_name') }}</td>
-            <td>{{ trans('messages.admin_vpngroups_comment') }}</td>
-            <td>{{ trans('messages.admin_vpngroups_status') }}</td>
+            <th>{{ trans('messages.admin_vpngroups_id') }}</th>
+            <th>{{ trans('messages.admin_vpngroups_name') }}</th>
+            <th>{{ trans('messages.admin_vpngroups_comment') }}</th>
+            <th>{{ trans('messages.admin_vpngroups_status') }}</th>
         </tr>
         </thead>
         <tbody>

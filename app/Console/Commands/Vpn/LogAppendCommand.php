@@ -5,6 +5,7 @@ namespace App\Console\Commands\Vpn;
 use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
+use App\Shared;
 use Illuminate\Console\Command;
 
 class LogAppendCommand extends Command
@@ -36,6 +37,17 @@ class LogAppendCommand extends Command
             'remote_ip' => $remote_ip,
             'request_ip' => $request_ip
         ]);
+
+        $client = VpnUsers::where('login', $common_name)->first();
+        if ($client) {
+            if ($event == Shared::CLIENT_CONNECT) {
+                $client->connect_status = Shared::CLIENT_CONNECTED;
+            } elseif ($event == Shared::CLIENT_DISCONNECT) {
+                $client->connect_status = Shared::CLIENT_DISCONNECTED;
+            }
+            $client->save();
+        }
+
 
         $this->info('Log record was added');
     }

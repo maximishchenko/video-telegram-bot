@@ -31,7 +31,7 @@
     </div>
 
 
-    <h3>Данные пользователя</h3>
+    <h3>{{ trans('messages.vpnusers_data') }}</h3>
     <hr>
 
     <table class="table table table-bordered">

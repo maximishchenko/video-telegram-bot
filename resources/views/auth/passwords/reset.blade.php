@@ -5,11 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="text-center card-header">
-                    <h3>{{ trans('messages.resetpwd_reset') }}</h3>
-                </div>
 
                 <div class="card-body">
+                    <div class="text-center">
+                        <h3>{{ trans('messages.resetpwd_reset') }}</h3>
+                    </div>
+
+                    <hr>
+
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
 

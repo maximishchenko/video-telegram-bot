@@ -10,12 +10,31 @@ use App\Http\Requests\Admin\VpnUsers\PasswordRequest;
 use App\Shared;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class VpnusersController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:admin')->only('destroy');
+    }
+
     public function index(Request $request)
     {
-        $query = VpnUsers::orderBy('id', 'desc');
+        if (Auth::user()->can('admin')) {
+            $query = VpnUsers::orderBy('id', 'desc');
+            $groups = VpnGroups::orderBy('name', 'ASC')->pluck('id','name')->toArray();
+        } else {
+            $groupIds = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if (empty($groupIds)) {
+                abort(403);
+            }
+            $query = VpnUsers::whereIn('group_id', $groupIds)->orderBy('id', 'desc');
+            $groups = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->pluck('id','name')->toArray();
+        }
+
         if (!empty($value = $request->get('id'))) {
             $query->where('id', $value);
         }
@@ -35,16 +54,58 @@ class VpnusersController extends Controller
             $query->where('status', $value);
         }
 
-        $groups = VpnGroups::where('status',Shared::STATUS_ACTIVE)->pluck('id','name')->toArray();
-
         $users = $query->paginate(Shared::DEFAULT_PAGINATE);
         return view('admin.vpnusers.index', compact('users', 'groups'));
     }
 
+    public function status(Request $request)
+    {
+        if (Auth::user()->can('admin')) {
+            $query = VpnUsers::orderBy('id', 'desc');
+            $groups = VpnGroups::orderBy('name', 'ASC')->pluck('id','name')->toArray();
+        } else {
+            $groupIds = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if (empty($groupIds)) {
+                abort(403);
+            }
+            $query = VpnUsers::whereIn('group_id', $groupIds)->orderBy('id', 'desc');
+            $groups = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->pluck('id','name')->toArray();
+        }
+        if (!empty($value = $request->get('id'))) {
+            $query->where('id', $value);
+        }
+        if (!empty($value = $request->get('group_id'))) {
+            $query->where('group_id', $value);
+        }
+
+        if (!empty($value = $request->get('name'))) {
+            $query->where('name', 'like', '%' . $value . '%');
+        }
+
+        if (!empty($value = $request->get('login'))) {
+            $query->where('login', 'like', '%' . $value . '%');
+        }
+
+        if (!empty($value = $request->get('connect_status'))) {
+            $query->where('connect_status', $value);
+        }
+
+        $users = $query->paginate(Shared::DEFAULT_PAGINATE);
+        return view('admin.vpnusers.status', compact('users', 'groups'));
+    }
 
     public function create()
     {
-        $groups = VpnGroups::all()->where('status', '=', Shared::STATUS_ACTIVE);
+        if (Auth::user()->can('admin')) {
+            $groups = VpnGroups::orderBy('name', 'ASC')->where('status', '=', Shared::STATUS_ACTIVE)->get();
+        } else {
+            $groupIds = Auth::user()->vpngroups()->allRelatedIds()->toArray();
+            if (empty($groupIds)) {
+                abort(403);
+            }
+            $groups = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->where('status', '=', Shared::STATUS_ACTIVE)->get();
+        }
+
         return view('admin.vpnusers.create', compact('groups'));
     }
 
@@ -52,8 +113,9 @@ class VpnusersController extends Controller
     {
         $user = VpnUsers::new(
             $request['name'],
-            $request['comment'],
-            $request['group_id']
+            $request['login'],
+            $request['group_id'],
+            $request['comment']
         );
         return redirect()->route('admin.vpnusers.show', $user);
     }
@@ -61,6 +123,7 @@ class VpnusersController extends Controller
     public function show($id)
     {
         $user = VpnUsers::findOrFail($id);
+        $user->checkClientAccess();
         $lastLog = VpnLog::where([
             ['common_name', $user->login],
             ['event', Shared::CLIENT_CONNECT]
@@ -71,40 +134,46 @@ class VpnusersController extends Controller
     public function edit($id)
     {
         $user = VpnUsers::findOrFail($id);
+        $user->checkClientAccess();
         return view('admin.vpnusers.edit', compact('user'));
     }
 
     public function update(Request $request, $id)
     {
         $user = VpnUsers::findOrFail($id);
-//        $user->update($request->only(['name', 'login', 'comment']));
+        $user->checkClientAccess();
         $user->update($request->only(['name', 'comment']));
         return redirect()->route('admin.vpnusers.show', $user);
     }
 
     public function destroy($id)
     {
-        //
+        $user = VpnUsers::findOrFail($id);
+        $user->delete();
+        return redirect()->route('admin.vpnusers.index');
     }
 
     public function changeStatus($id)
     {
-        $group = VpnUsers::findOrFail($id);
-        if($group->isActive()) {
-            $group->block();
-        } elseif($group->isBlocked()) {
-            $group->activate();
+        $user = VpnUsers::findOrFail($id);
+        $user->checkClientAccess();
+        if($user->isActive()) {
+            $user->block();
+        } elseif($user->isBlocked()) {
+            $user->activate();
         }
-        return redirect()->route('admin.vpnusers.show', $group);
+        return redirect()->route('admin.vpnusers.show', $user);
     }
 
     public function password(VpnUsers $user)
     {
+        $user->checkClientAccess();
         return view('admin.vpnusers.password', compact('user'));
     }
 
     public function setpassword(PasswordRequest $request, VpnUsers $user)
     {
+        $user->checkClientAccess();
         $user = $user->changePassword(
             $request['password_plain']
         );
