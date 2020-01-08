@@ -3,20 +3,20 @@
 @section('content')
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.users.index') }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.users.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.breadcrumbs_admin_users') }}
         </a>
-        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_update') }}
         </a>
-        <a href="{{ route('admin.users.password', $user) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.users.password', $user) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_password') }}
         </a>
 
 
         <form method="post" action="{{ route('admin.users.changeStatus', $user) }}" class="mr-1" onSubmit="return confirm(' {{ $user->changeStatusConfirmMessage() }} ');">
             @csrf
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-dark btn-sm">
                 {{ $user->changeStatusButtonText() }}
             </button>
         </form>
@@ -24,7 +24,7 @@
         <form method="post" action="{{ route('admin.users.update', $user) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.delete_confirm') }} ');">
             @csrf
             @method('DELETE')
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-dark btn-sm">
                 {{ trans('messages.admin_btn_delete') }}
             </button>
         </form>

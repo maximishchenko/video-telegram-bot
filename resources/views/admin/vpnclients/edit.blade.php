@@ -95,14 +95,14 @@
 
             <hr>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary btn-sm">
+                <button type="submit" class="btn btn-dark btn-sm">
                     {{ trans('messages.btn_save') }}
                 </button>
 
-                <a href="{{ route('admin.vpnclients.index') }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.vpnclients.index') }}" class="btn btn-dark btn-sm">
                     {{ trans('messages.vpnclients') }}
                 </a>
-                <a href="{{ route('admin.vpnclients.show', $client) }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.vpnclients.show', $client) }}" class="btn btn-dark btn-sm">
                     {{ trans('messages.to_view') }}
                 </a>
             </div>

@@ -34,7 +34,7 @@
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-3">
-                                    <button type="submit" class="btn btn-primary btn-sm btn-block">
+                                    <button type="submit" class="btn btn-dark btn-sm btn-block">
                                         {{ trans('messages.admin_btn_password') }}
                                     </button>
                                 </div>

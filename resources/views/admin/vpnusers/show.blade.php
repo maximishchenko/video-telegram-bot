@@ -6,20 +6,20 @@
     </style>
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_vpnusers') }}
         </a>
-        <a href="{{ route('admin.vpnusers.edit', $user) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnusers.edit', $user) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_update') }}
         </a>
 
-        <a href="{{ route('admin.vpnusers.password', $user) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnusers.password', $user) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_password') }}
         </a>
 
         <form method="post" action="{{ route('admin.vpnusers.changeStatus', $user) }}" class="mr-1" onSubmit="return confirm(' {{ $user->changeStatusConfirmMessage() }} ');">
             @csrf
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-dark btn-sm">
                 {{ $user->changeStatusButtonText() }}
             </button>
         </form>
@@ -28,7 +28,7 @@
         <form method="post" action="{{ route('admin.vpnusers.update', $user) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.delete_confirm') }} ');">
             @csrf
             @method('DELETE')
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-dark btn-sm">
                 {{ trans('messages.admin_btn_delete') }}
             </button>
         </form>

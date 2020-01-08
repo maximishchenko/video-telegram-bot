@@ -31,11 +31,11 @@
             <hr>
 
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary btn-sm">
+                <button type="submit" class="btn btn-dark btn-sm">
                     {{ trans('messages.btn_save') }}
                 </button>
 
-                <a class="btn btn-primary btn-sm" href="{{ route('admin.vpngroups.index') }}">
+                <a class="btn btn-dark btn-sm" href="{{ route('admin.vpngroups.index') }}">
                     {{ trans('messages.breadcrumbs_admin_vpngroups') }}
                 </a>
             </div>

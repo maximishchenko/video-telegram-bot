@@ -72,11 +72,11 @@
                     <div class="clearfix"></div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button type="submit" class="btn btn-dark btn-sm">
                                 {{ trans('messages.btn_search') }}
                             </button>
 
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnclients.index') }}">
+                            <a class="btn btn-dark btn-sm" href="{{ route('admin.vpnclients.index') }}">
                                 {{ trans('messages.cancel_search') }}
                             </a>
                         </div>
@@ -88,7 +88,7 @@
 
     <div class="d-flex flex-row mb-3">
         @can('admin')
-        <a href="{{ route('admin.vpnclients.create') }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnclients.create') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_create') }}
         </a>
         @endcan

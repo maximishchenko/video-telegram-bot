@@ -39,14 +39,14 @@
 
             <hr>
             <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary btn-sm">
+                <button type="submit" class="btn btn-dark btn-sm">
                     {{ trans('messages.btn_save') }}
                 </button>
 
-                <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-dark btn-sm">
                     {{ trans('messages.vpngroups') }}
                 </a>
-                <a href="{{ route('admin.vpnusers.show', $user) }}" class="btn btn-primary btn-sm">
+                <a href="{{ route('admin.vpnusers.show', $user) }}" class="btn btn-dark btn-sm">
                     {{ trans('messages.to_view') }}
                 </a>
             </div>

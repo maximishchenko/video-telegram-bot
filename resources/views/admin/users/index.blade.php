@@ -68,11 +68,11 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button type="submit" class="btn btn-dark btn-sm">
                                 {{ trans('messages.btn_search') }}
                             </button>
 
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.users.index') }}">
+                            <a class="btn btn-dark btn-sm" href="{{ route('admin.users.index') }}">
                                 {{ trans('messages.cancel_search') }}
                             </a>
                         </div>
@@ -83,7 +83,7 @@
     </div>
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.users.create') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_create') }}
         </a>
         <div class="col-sm-2">

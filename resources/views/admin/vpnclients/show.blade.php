@@ -4,15 +4,15 @@
 
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.vpnclients.index') }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnclients.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_vpnclients') }}
         </a>
         @can('admin')
-        <a href="{{ route('admin.vpnclients.edit', $client) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnclients.edit', $client) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_update') }}
         </a>
         @endcan
-        <a href="{{ route('admin.vpnclients.config', $client) }}" class="btn btn-primary btn-sm mr-1">
+        <a href="{{ route('admin.vpnclients.config', $client) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_getconfig') }}
         </a>
 
@@ -20,7 +20,7 @@
         @can('admin')
         <form method="post" action="{{ route('admin.vpnclients.changeStatus', $client) }}" class="mr-1" onSubmit="return confirm(' {{ $client->changeStatusConfirmMessage() }} ');">
             @csrf
-            <button class="btn btn-primary btn-sm">
+            <button class="btn btn-dark btn-sm">
                 {{ $client->changeStatusButtonText() }}
             </button>
         </form>
@@ -30,7 +30,7 @@
             <form method="post" action="{{ route('admin.vpnclients.destroy', $client) }}" class="mr-1" onSubmit="return confirm(' {{ trans('messages.delete_confirm') }} ');">
                 @csrf
                 @method('DELETE')
-                <button class="btn btn-primary btn-sm">
+                <button class="btn btn-dark btn-sm">
                     {{ trans('messages.admin_btn_delete') }}
                 </button>
             </form>

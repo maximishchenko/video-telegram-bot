@@ -47,11 +47,11 @@
                     </div>
                     <div class="col-sm-3">
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-sm">
+                            <button type="submit" class="btn btn-dark btn-sm">
                                 {{ trans('messages.btn_search') }}
                             </button>
 
-                            <a class="btn btn-primary btn-sm" href="{{ route('admin.vpnlogs.index') }}">
+                            <a class="btn btn-dark btn-sm" href="{{ route('admin.vpnlogs.index') }}">
                                 {{ trans('messages.cancel_search') }}
                             </a>
                         </div>
