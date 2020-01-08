@@ -73,7 +73,7 @@
             </th>
             <td>
                 <span id="msk" class="msk">{{ $user->password_plain }}</span>
-                &nbsp; <input id="togglepwd" type="checkbox" onchange="window.pwd('msk', 'msk')">&nbsp; {{ trans('messages.toggle_pwd') }}
+                &nbsp; <input id="togglepwd" type="checkbox" class="custom-control-inputs" onchange="window.pwd('msk', 'msk')">&nbsp; {{ trans('messages.toggle_pwd') }}
 
             </td>
         </tr>
@@ -143,5 +143,24 @@
 
         </div>
     </div>
+
+    <script>
+        function copyDivToClipboard(elem) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(elem));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
+        function toggleElementById(id) {
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 @endsection

@@ -1,6 +1,7 @@
 <?php
 
 use App\Entity\User;
+use App\Entity\VpnClientsTemplates;
 use App\Entity\VpnGroups;
 use App\Entity\VpnUsers;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
@@ -137,4 +138,24 @@ Breadcrumbs::register('admin.vpnusers.edit', function (BreadcrumbsGenerator $cru
 Breadcrumbs::register('admin.vpnlogs.index', function (BreadcrumbsGenerator $crumbs) {
     $crumbs->parent('admin.home');
     $crumbs->push(trans('messages.dashboard_admin_vpnlogs'), route('admin.vpnlogs.index'));
+});
+
+Breadcrumbs::register('admin.vpnclients.index', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.home');
+    $crumbs->push(trans('messages.vpnclients'), route('admin.vpnclients.index'));
+});
+
+Breadcrumbs::register('admin.vpnclients.create', function (BreadcrumbsGenerator $crumbs) {
+    $crumbs->parent('admin.vpnclients.index');
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpnusers_create'), route('admin.vpnclients.create'));
+});
+Breadcrumbs::register('admin.vpnclients.show', function (BreadcrumbsGenerator $crumbs, $id) {
+    $client = VpnClientsTemplates::findOrFail($id);
+    $crumbs->parent('admin.vpnclients.index');
+    $crumbs->push($client->name, route('admin.vpnclients.show', ['id' => $id]));
+});
+Breadcrumbs::register('admin.vpnclients.edit', function (BreadcrumbsGenerator $crumbs, $id) {
+    $client = VpnClientsTemplates::findOrFail($id);
+    $crumbs->parent('admin.vpnclients.show', $id);
+    $crumbs->push(trans('messages.breadcrumbs_admin_vpnclients_update'), route('admin.vpnclients.edit', $client));
 });

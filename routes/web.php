@@ -29,6 +29,9 @@ Route::group(
 
         Route::get('/vpnusers/status', 'VpnusersController@status')->name('vpnusers.status');
         Route::resource('vpnusers', 'VpnusersController');
+        Route::post('/vpnclients/{client}/changeStatus', 'VpnClientsTemplatesController@changeStatus')->name('vpnclients.changeStatus');
+        Route::get('/vpnclients/{client}/config', 'VpnClientsTemplatesController@config')->name('vpnclients.config');
+        Route::resource('vpnclients', 'VpnClientsTemplatesController');
 
         Route::post('/vpnusers/{user}/changeStatus', 'VpnusersController@changeStatus')->name('vpnusers.changeStatus');
         Route::post('/vpnusers/{user}/setpassword', 'VpnusersController@setpassword')->name('vpnusers.setpassword');

@@ -50,3 +50,12 @@ window.pager = function (name, value) {
     var new_url = url.toString();
     window.location.href = new_url;
 }
+
+window.fileInputGetName = function (labelID)
+{
+    document.getElementById(labelID).addEventListener('change',function(e){
+        var fileName = document.getElementById(labelID).files[0].name;
+        var nextSibling = e.target.nextElementSibling
+        nextSibling.innerText = fileName
+    })
+}

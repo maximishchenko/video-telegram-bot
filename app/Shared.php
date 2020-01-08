@@ -22,6 +22,10 @@ class Shared
 
     public const PAGER_100 = 100;
 
+    public const PROTOCOL_TCP = 'tcp';
+
+    public const PROTOCOL_UDP = 'udp';
+
     public const CLIENT_CONNECT = 'client-connect';
 
     public const CLIENT_DISCONNECT = 'client-disconnect';
@@ -85,6 +89,14 @@ class Shared
         return [
             static::STATUS_ACTIVE => trans('roles.active'),
             static::STATUS_BLOCKED => trans('roles.blocked'),
+        ];
+    }
+
+    public static function getProtocolsArray(): array
+    {
+        return [
+            static::PROTOCOL_TCP => trans('messages.protocol_tcp'),
+            static::PROTOCOL_UDP => trans('messages.protocol_udp'),
         ];
     }
 

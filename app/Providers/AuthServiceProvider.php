@@ -55,6 +55,9 @@ class AuthServiceProvider extends ServiceProvider
             return false;
         });
 
+        Gate::define('config_edit', function(User $user) {
+            return $user->isAdmin();
+        });
 
         Gate::define('display_clients', function(User $user) {
             $userGroups = Auth::user()->vpngroups()->allRelatedIds()->toArray();
