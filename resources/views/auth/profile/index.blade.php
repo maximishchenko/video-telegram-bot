@@ -3,11 +3,11 @@
 @section('content')
 
     <div class="d-flex flex-row mb-3">
-        <a href="{{ route('profile.edit') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('profile.edit') }}" class="btn btn-dark btn-sm">
             {{ trans('messages.profile_update') }}
         </a>
         &nbsp;
-        <a href="{{ route('profile.password') }}" class="btn btn-primary btn-sm">
+        <a href="{{ route('profile.password') }}" class="btn btn-dark btn-sm">
             {{ trans('messages.admin_btn_password') }}
         </a>
     </div>

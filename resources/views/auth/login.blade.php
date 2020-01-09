@@ -55,7 +55,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-3">
-                                <button type="submit" class="btn btn-primary btn-block btn-sm">
+                                <button type="submit" class="btn btn-dark btn-block btn-sm">
                                     {{ trans('messages.login_btn_login') }}
                                 </button>
 
