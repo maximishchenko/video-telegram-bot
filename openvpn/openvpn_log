@@ -7,9 +7,11 @@ $script_type = getenv('script_type');
 $common_name = getenv('common_name');
 $ifconfig_pool_remote_ip = getenv('ifconfig_pool_remote_ip');
 $untrusted_ip = getenv('untrusted_ip');
+$bytes_received = getenv('bytes_received');
+$bytes_sent = getenv('bytes_sent');
 
 if ($script_type == 'client-connect') {
     $cmd = exec("php $root/artisan log:append $common_name $script_type $ifconfig_pool_remote_ip $untrusted_ip", $o, $v);
 } elseif ($script_type == 'client-disconnect') {
-    $cmd = exec("php $root/artisan log:append $common_name $script_type", $o, $v);
+    $cmd = exec("php $root/artisan log:append $common_name $script_type null null $bytes_received $bytes_sent", $o, $v);
 }
