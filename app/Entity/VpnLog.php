@@ -10,7 +10,7 @@ class VpnLog extends Model
     protected $table = 'vpn_logs';
 
     protected $fillable = [
-        'common_name', 'name', 'group', 'event', 'remote_ip', 'request_ip'
+        'common_name', 'name', 'group', 'event', 'remote_ip', 'request_ip', 'bytes_received', 'bytes_sent'
     ];
 
     public function connected()
@@ -47,8 +47,31 @@ class VpnLog extends Model
     {
         return $this->hasOne('App\Entity\VpnUsers', 'login', 'common_name');
     }
+
     public function vpngroup()
     {
         return $this->hasOne('App\Entity\VpnGroups', 'id', 'group_id');
+    }
+
+    public function getFullName()
+    {
+        $name = (isset($this->name) && $this->name !== 'null') ? '(' . $this->name . ',' : null;
+        $group = (isset($this->group) && $this->group !== 'null') ? $this->group . ')' : null;
+        return $this->common_name . ' ' . $name . ' ' . $group;
+    }
+
+    public function getIpAddresses()
+    {
+        $remote_ip = (isset($this->remote_ip) && $this->remote_ip !== 'null') ? $this->remote_ip : null;
+        $request_ip = (isset($this->request_ip) && $this->request_ip !== 'null') ? $this->request_ip : null;
+        return $request_ip . ' ' . $remote_ip;
+    }
+
+    public function getBytesCount()
+    {
+        $bytes_received = (isset($this->bytes_received) && $this->bytes_received !== 'null') ? $this->bytes_received: null;
+        $bytes_sent = (isset($this->bytes_sent) && $this->bytes_sent !== 'null') ? $this->bytes_sent: null;
+
+        return ($bytes_sent !== null && $bytes_received !== null) ? $bytes_sent . ' | ' . $bytes_received : null;
     }
 }

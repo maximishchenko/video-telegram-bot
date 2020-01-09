@@ -10,7 +10,7 @@ use Illuminate\Console\Command;
 
 class LogAppendCommand extends Command
 {
-    protected $signature = 'log:append {common_name} {event} {remote_ip=null} {request_ip=null}';
+    protected $signature = 'log:append {common_name} {event} {remote_ip=null} {request_ip=null} {bytes_received=null} {bytes_sent=null}';
 
     protected $description = 'Connect log';
 
@@ -25,6 +25,8 @@ class LogAppendCommand extends Command
         $event = $this->argument('event');
         $remote_ip = $this->argument('remote_ip');
         $request_ip = $this->argument('request_ip');
+        $bytes_received = $this->argument('bytes_received');
+        $bytes_sent = $this->argument('bytes_sent');
 
         $user = VpnUsers::where('login',$common_name)->first();
         $group = VpnGroups::where('id',$user->group_id)->first();
@@ -35,7 +37,9 @@ class LogAppendCommand extends Command
             'event' => $event,
             'group' => $group->name,
             'remote_ip' => $remote_ip,
-            'request_ip' => $request_ip
+            'request_ip' => $request_ip,
+            'bytes_received' => $bytes_received,
+            'bytes_sent' => $bytes_sent
         ]);
 
         $client = VpnUsers::where('login', $common_name)->first();

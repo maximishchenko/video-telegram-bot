@@ -171,4 +171,6 @@ return [
     'breadcrumbs_admin_vpnclients_update' => 'Редактирование',
     'admin_btn_getconfig' => 'Скачать конфигурацию',
     'dashboard_manage_vpn_config' => 'Конфигурации клиентов',
+    'admin_vpnlogs_ip' => 'IP исходный/выданный',
+    'admin_vpnlogs_bytes_in_out' => 'Отправлено/получено, байт'
 ];
