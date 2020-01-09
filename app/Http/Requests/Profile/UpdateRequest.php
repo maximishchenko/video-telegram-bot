@@ -7,9 +7,6 @@ use App\Shared;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-/**
- * @property User $user
- */
 class UpdateRequest extends FormRequest
 {
     public function authorize(): bool
@@ -21,7 +18,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:255|unique:users',
+            'phone' => 'required|string|max:255|unique:users,id,' . $this->id,
             'email' => 'required|string|max:255|email|unique:users,id,' . $this->id,
         ];
     }
