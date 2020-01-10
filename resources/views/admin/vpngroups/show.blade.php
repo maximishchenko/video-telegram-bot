@@ -2,6 +2,10 @@
 
 @section('content')
 
+    <h4>
+        {{ trans('messages.admin_vpngroups_info', ['name' => $group->name]) }}
+    </h4>
+    <hr>
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpngroups.index') }}" class="btn btn-dark btn-sm mr-1">
@@ -89,7 +93,7 @@
                         {{ $client->id }}
                     </td>
                     <td>
-                        <a href="{{ route('admin.vpnusers.show', ['id' => $client->id]) }}" target="_blank">
+                        <a class="baselink" href="{{ route('admin.vpnusers.show', ['id' => $client->id]) }}" target="_blank">
                             {{ $client->name }}
                         </a>
                     </td>

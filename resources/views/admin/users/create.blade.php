@@ -2,8 +2,13 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
-    <form method="POST" action="{{ route('admin.users.store') }}">
+    <h4>
+        {{ trans('messages.admin_users_create') }}
+    </h4>
+    <hr>
+
+    <div class="offset-3s col-md-6s">
+    <form method="POST" action="{{ route('admin.users.store') }}" autocomplete="off">
         @csrf
 
         <div class="form-group">

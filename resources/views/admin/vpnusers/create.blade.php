@@ -2,7 +2,11 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
+    <h4>
+        {{ trans('messages.admin_vpnusers_create') }}
+    </h4>
+    <hr>
+
         <form method="POST" action="{{ route('admin.vpnusers.store') }}" autocomplete="off">
             @csrf
 

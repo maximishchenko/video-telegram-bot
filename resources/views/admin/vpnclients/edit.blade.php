@@ -2,7 +2,10 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
+    <h4>
+        {{ trans('messages.admin_vpnclients_update', ['name' => $client->name]) }}
+    </h4>
+    <hr>
 
         <form method="POST" action="{{ route('admin.vpnclients.update', $client) }}" enctype="multipart/form-data">
             @csrf
@@ -114,5 +117,4 @@
             window.fileInputGetName("key_file");
         </script>
 
-    </div>
 @endsection

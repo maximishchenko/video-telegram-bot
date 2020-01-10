@@ -2,7 +2,7 @@
     <div class="container">
         <div class="border-top pt-3">
             <p class="float-left">
-                &copy; {{ date('Y') }} - <a href="mailto://{{ config('app.developer', 'info@contoso.com') }}">
+                &copy; {{ date('Y') }} - <a class="baselink" href="mailto://{{ config('app.developer', 'info@contoso.com') }}">
                     {{ config('app.developer', 'info@contoso.com') }}
                 </a>
             </p>

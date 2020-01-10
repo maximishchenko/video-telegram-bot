@@ -2,11 +2,11 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
 
-        <h3 class="text-center">
+        <h4>
             {{ $user->name }} ({{ $user->login }})
-        </h3>
+        </h4>
+        <hr>
 
         <div class="alert alert-info text-center">
             {{ trans('messages.edit_vpnuser_msg') }}
@@ -52,6 +52,4 @@
             </div>
         </form>
 
-
-    </div>
 @endsection

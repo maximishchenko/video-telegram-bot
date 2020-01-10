@@ -2,6 +2,8 @@
 
 @section('content')
 
+    <h4>{{ trans('messages.vpnusers_data') }}</h4>
+
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.users.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.breadcrumbs_admin_users') }}
@@ -31,8 +33,6 @@
     </div>
 
 
-    <h3>{{ trans('messages.vpnusers_data') }}</h3>
-    <hr>
 
     <table class="table table table-bordered">
         <tbody>
@@ -50,11 +50,15 @@
             </tr>
             <tr>
                 <th>{{ trans('messages.admin_users_phone') }}</th>
-                <td><a href="callto://{{ $user->phone }}">{{ $user->phone }}</a></td>
+                <td>
+                    <a class="baselink" href="callto://{{ $user->phone }}">{{ $user->phone }}</a>
+                </td>
             </tr>
             <tr>
                 <th>{{ trans('messages.admin_users_email') }}</th>
-                <td><a href="mailto://{{ $user->email }}">{{ $user->email }}</a></td>
+                <td>
+                    <a class="baselink" href="mailto://{{ $user->email }}">{{ $user->email }}</a>
+                </td>
             </tr>
             <tr>
                 <th>{{ trans('messages.admin_users_role') }}</th>
@@ -95,7 +99,9 @@
     </table>
 
 
-    <h3>Доступ к группам</h3>
+    <h4>
+        {{ trans('messages.access_to_groups') }}
+    </h4>
     <hr>
 
     @if ($user->isUser())

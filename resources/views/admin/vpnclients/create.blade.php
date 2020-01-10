@@ -2,8 +2,11 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
-{{--        --}}
+    <h4>
+        {{ trans('messages.admin_vpnclients_create') }}
+    </h4>
+    <hr>
+
         <form method="POST" action="{{ route('admin.vpnclients.store') }}" enctype="multipart/form-data" autocomplete="off">
             @csrf
 
@@ -119,7 +122,7 @@
             </div>
         </form>
 
-    </div>
+
     <script>
         window.fileInputGetName("ca_file");
         window.fileInputGetName("cert_file");

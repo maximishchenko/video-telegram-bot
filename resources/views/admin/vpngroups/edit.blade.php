@@ -2,7 +2,10 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
+    <h4>
+        {{ trans('messages.admin_vpngroups_update', ['name' => $group->name]) }}
+    </h4>
+    <hr>
 
         <form method="POST" action="{{ route('admin.vpngroups.update', $group) }}">
             @csrf
@@ -45,5 +48,4 @@
         </form>
 
 
-    </div>
 @endsection

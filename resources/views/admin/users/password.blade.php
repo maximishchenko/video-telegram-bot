@@ -8,7 +8,7 @@
 
                     <div class="card-body">
                         <div class="text-center">
-                            <h3>{{ trans('messages.change_password') }}</h3>
+                            <h4>{{ trans('messages.change_password') }}</h4>
                         </div>
                         <hr>
                         <form method="POST" action="{{ route('admin.users.setpassword', $user) }}">

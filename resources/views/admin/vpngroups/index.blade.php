@@ -2,8 +2,15 @@
 
 @section('content')
 
+    <h4>
+        {{ trans('messages.admin_vpnusers_list') }}
+    </h4>
 
-    <div class="card mb-3">
+    <a class="toggleSearchBtn baselink boldlink text-right" href="javascript:void(0);" onclick="window.toggleDiv('search', 'vpngroups')">
+        {{ trans('messages.toggle_search_text') }}
+    </a>
+
+    <div class="card mb-3" id="search">
         <div class="card-body" id="vpngroups-search">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
@@ -55,11 +62,16 @@
     </div>
 
     <div class="d-flex flex-row mb-3">
-        @can('admin')
-        <a href="{{ route('admin.vpngroups.create') }}" class="btn btn-dark btn-sm mr-1">
-            {{ trans('messages.admin_btn_create') }}
-        </a>
-        @endcan
+        <div class="row">
+            @can('admin')
+            <div class="col-sm-1">
+                <a href="{{ route('admin.vpngroups.create') }}" class="btn btn-dark btn-sm mr-1">
+                    {{ trans('messages.admin_btn_create') }}
+                </a>
+            </div>
+            @endcan
+        </div>
+
         <div class="col-sm-2">
             <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
                 <option value="" disabled selected>
@@ -73,11 +85,12 @@
                 @endforeach
             </select>
         </div>
+        <div class="right">
+            <b>{{ trans('messages.count_grid', ['count' => $groups->count(), 'total' => $groups->total()]) }}</b>
+        </div>
     </div>
 
-    <div class="text-right">
-        <b>{{ trans('messages.count_grid', ['count' => $groups->count(), 'total' => $groups->total()]) }}</b>
-    </div>
+
 
     <table class="table table-bordered table-striped">
         <thead>
@@ -94,7 +107,7 @@
             <tr>
                 <td>{{ $group->id }}</td>
                 <td>
-                    <a href="{{ route('admin.vpngroups.show', $group) }}">{{ $group->name }}</a>
+                    <a class="baselink" href="{{ route('admin.vpngroups.show', $group) }}">{{ $group->name }}</a>
                 </td>
                 <td>{{ $group->comment }}</td>
                 <td>
@@ -113,5 +126,9 @@
     </table>
 
     {{ $groups->links() }}
+
+    <script>
+        window.checkVisibiliti('search', 'vpngroups');
+    </script>
 
 @endsection

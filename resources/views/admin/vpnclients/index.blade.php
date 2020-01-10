@@ -2,7 +2,15 @@
 
 @section('content')
 
-    <div class="card mb-3">
+    <h4>
+        {{ trans('messages.admin_vpnclients_list') }}
+    </h4>
+
+    <a class="toggleSearchBtn baselink boldlink text-right" href="javascript:void(0);" onclick="window.toggleDiv('search', 'vpnclients')">
+        {{ trans('messages.toggle_search_text') }}
+    </a>
+
+    <div class="card mb-3" id="search">
         <div class="card-body" id="vpngroups-search">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
@@ -86,32 +94,35 @@
         </div>
     </div>
 
-    <div class="d-flex flex-row mb-3">
-        @can('admin')
-        <a href="{{ route('admin.vpnclients.create') }}" class="btn btn-dark btn-sm mr-1">
-            {{ trans('messages.admin_btn_create') }}
-        </a>
-        @endcan
-        <div class="col-sm-2">
-            <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
-                <option value="" disabled selected>
-                    {{ trans('messages.pager_count_elements') }}
-                </option>
-                <option value=""></option>
-                @foreach(\App\Shared::getPagersArray() as $value => $label)
-                    <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
-                        {{ $label }}
+    <div class="d-flexss flex-rowss ssmb-3">
+        <div class="row">
+            @can('admin')
+            <div class="col-sm-1">
+                <a href="{{ route('admin.vpnclients.create') }}" class="btn btn-dark btn-sm mr-1">
+                    {{ trans('messages.admin_btn_create') }}
+                </a>
+            </div>
+            @endcan
+            <div class="col-sm-2">
+                <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
+                    <option value="" disabled selected>
+                        {{ trans('messages.pager_count_elements') }}
                     </option>
-                @endforeach
-            </select>
+                    <option value=""></option>
+                    @foreach(\App\Shared::getPagersArray() as $value => $label)
+                        <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+                <div class="right">
+                    <b>{{ trans('messages.count_grid', ['count' => $clients->count(), 'total' => $clients->total()]) }}</b>
+                </div>
         </div>
+        <hr>
     </div>
 
-    <div class="text-right">
-        <b>{{ trans('messages.count_grid', ['count' => $clients->count(), 'total' => $clients->total()]) }}</b>
-
-
-    </div>
 
 
 
@@ -131,7 +142,7 @@
             <tr>
                 <td>{{ $client->id }}</td>
                 <td>
-                    <a href="{{ route('admin.vpnclients.show', $client) }}">{{ $client->name }}</a>
+                    <a class="baselink" href="{{ route('admin.vpnclients.show', $client) }}">{{ $client->name }}</a>
                 </td>
                 <td>{{ $client->getServerUri() }}</td>
                 <td>{{ $client->comment }}</td>
@@ -151,6 +162,8 @@
 
     {{ $clients->links() }}
 
+
     <script>
+        window.checkVisibiliti('search', 'vpnclients');
     </script>
 @endsection

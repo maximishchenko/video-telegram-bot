@@ -1,9 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-    <style>
-        .msk{ -webkit-text-security: disc !important; }
-    </style>
+
+    <h4>
+        {{ trans('messages.admin_vpnusers_show', ['name' => $user->name]) }}
+    </h4>
+    <hr>
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-dark btn-sm mr-1">
@@ -48,21 +50,35 @@
     <table class="table table table-bordered">
         <tbody>
         <tr>
-            <th>{{ trans('messages.admin_vpnusers_id') }}</th>
-            <td>{{ $user->id }}</td>
-        </tr>
-        <tr>
-            <th>{{ trans('messages.admin_vpnusers_name') }}</th>
-            <td>{{ $user->name }}</td>
-        </tr>
-        <tr>
-            <th>{{ trans('messages.admin_vpnusers_login') }}</th>
-            <td>{{ $user->login }}</td>
-        </tr>
-        <tr>
-            <th>{{ trans('messages.admin_vpnusers_group_id') }}</th>
+            <th>
+                {{ trans('messages.admin_vpnusers_id') }}
+            </th>
             <td>
-                <a href="{{ route('admin.vpngroups.show', $user->group->id) }}" target="_blank">
+                {{ $user->id }}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{ trans('messages.admin_vpnusers_name') }}
+            </th>
+            <td>
+                {{ $user->name }}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{ trans('messages.admin_vpnusers_login') }}
+            </th>
+            <td>
+                {{ $user->login }}
+            </td>
+        </tr>
+        <tr>
+            <th>
+                {{ trans('messages.admin_vpnusers_group_id') }}
+            </th>
+            <td>
+                <a class="baselink" href="{{ route('admin.vpngroups.show', $user->group->id) }}" target="_blank">
                     {{ $user->group->name }}
                 </a>
             </td>
@@ -92,8 +108,12 @@
             </td>
         </tr>
         <tr>
-            <th>{{ trans('messages.admin_vpngroups_comment') }}</th>
-            <td>{{ $user->comment }}</td>
+            <th>
+                {{ trans('messages.admin_vpngroups_comment') }}
+            </th>
+            <td>
+                {{ $user->comment }}
+            </td>
         </tr>
         </tbody>
     </table>
@@ -137,10 +157,6 @@
                     </td>
                 </tr>
             </table>
-
-
-
-
         </div>
     </div>
 

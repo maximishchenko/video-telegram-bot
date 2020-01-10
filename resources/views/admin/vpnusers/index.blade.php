@@ -2,7 +2,14 @@
 
 @section('content')
 
-    <div class="card mb-3">
+    <h4>
+        {{ trans('messages.admin_vpnusers_list') }}
+    </h4>
+
+    <a class="toggleSearchBtn baselink boldlink text-right" href="javascript:void(0);" onclick="window.toggleDiv('search', 'vpnusers')">
+        {{ trans('messages.toggle_search_text') }}
+    </a>
+    <div class="card mb-3" id="search">
         <div class="card-body">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
@@ -68,33 +75,38 @@
         </div>
     </div>
 
-    <div class="d-flex flex-row mb-3">
-        <a href="{{ route('admin.vpnusers.create') }}" class="btn btn-dark btn-sm mr-1">
-            {{ trans('messages.admin_btn_create') }}
-        </a>
-        <a href="{{ route('admin.vpnusers.status') }}" class="btn btn-dark btn-sm mr-1">
-            {{ trans('messages.admin_vpnusers_connect_status') }}
-        </a>
-        <div class="col-sm-2">
-            <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
-                <option value="" disabled selected>
-                    {{ trans('messages.pager_count_elements') }}
-                </option>
-                <option value=""></option>
-                @foreach(\App\Shared::getPagersArray() as $value => $label)
-                    <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
-                        {{ $label }}
+    <div class="d-flexs flex-rows mbs-3">
+
+        <div class="row">
+            <div class="col-sm-1">
+                <a href="{{ route('admin.vpnusers.create') }}" class="btn btn-dark btn-sm mr-1">
+                    {{ trans('messages.admin_btn_create') }}
+                </a>
+            </div>
+            <div class="col-sm-2">
+                <a href="{{ route('admin.vpnusers.status') }}" class="btn btn-dark btn-sm mr-1">
+                    {{ trans('messages.admin_vpnusers_connect_status') }}
+                </a>
+            </div>
+            <div class="col-sm-2">
+                <select style="height: unset" class="form-control input-sm" name="pageSize" id="pageSize" onchange="window.pager(this.name, this.value)">
+                    <option value="" disabled selected>
+                        {{ trans('messages.pager_count_elements') }}
                     </option>
-                @endforeach
-            </select>
+                    <option value=""></option>
+                    @foreach(\App\Shared::getPagersArray() as $value => $label)
+                        <option value="{{ $value }}" {{ (isset($_GET['pageSize']) && ($_GET['pageSize'] == $value)) ? ' selected' : '' }}>
+                            {{ $label }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="right">
+                <b>{{ trans('messages.count_grid', ['count' => $users->count(), 'total' => $users->total()]) }}</b>
+            </div>
         </div>
     </div>
 
-    <div class="text-right">
-        <b>{{ trans('messages.count_grid', ['count' => $users->count(), 'total' => $users->total()]) }}</b>
-
-
-    </div>
 
 
 
@@ -115,11 +127,17 @@
             <tr class="{{ ($user->group->status == \App\Shared::STATUS_BLOCKED) ? 'alert alert-danger' : '' }}">
                 <td>{{ $user->id }}</td>
                 <td>
-                    <a href="{{ route('admin.vpnusers.show', $user) }}">{{ $user->name }}</a>
+                    <a class="baselink" href="{{ route('admin.vpnusers.show', $user) }}">{{ $user->name }}</a>
                 </td>
-                <td>{{ $user->login }}</td>
-                <td>{{ $user->group->name }}</td>
-                <td>{{ $user->comment }}</td>
+                <td>
+                    {{ $user->login }}
+                </td>
+                <td>
+                    {{ $user->group->name }}
+                </td>
+                <td>
+                    {{ $user->comment }}
+                </td>
                 <td>
 
                     @if ($user->isActive())
@@ -137,5 +155,6 @@
     {{ $users->links() }}
 
     <script>
+        window.checkVisibiliti('search', 'vpnusers');
     </script>
 @endsection

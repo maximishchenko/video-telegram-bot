@@ -22,3 +22,24 @@ body {
 .mar-top-20 {
     margin: 20px 0;
 }
+
+.toggleSearchBtn {
+    margin: 10px 0 0 0;
+    display: block;
+}
+a.boldlink {
+    font-weight: bold;
+}
+a.baselink {
+    color: #000;
+}
+a.baselink:hover, a.baselink:focus {
+    color: #c03;
+    text-decoration: none;
+}
+.right {
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.msk{ -webkit-text-security: disc !important; }

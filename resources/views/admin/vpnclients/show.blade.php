@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <h4>
+        {{ trans('messages.admin_vpnclients_show', ['name' => $client->name]) }}
+    </h4>
+
+    <hr>
 
     <div class="d-flex flex-row mb-3">
         <a href="{{ route('admin.vpnclients.index') }}" class="btn btn-dark btn-sm mr-1">
@@ -54,7 +59,7 @@
         <tr>
             <th>{{ trans('messages.admin_vpnclients_ca_file') }}</th>
             <td>
-                <a href="{{ $client->getCAUrl() }}">
+                <a class="baselink" href="{{ $client->getCAUrl() }}">
                     {{ $client->ca_file }}
                 </a>
             </td>
@@ -62,7 +67,7 @@
         <tr>
             <th>{{ trans('messages.admin_vpnclients_cert_file') }}</th>
             <td>
-                <a href="{{ $client->getCertUrl() }}">
+                <a class="baselink" href="{{ $client->getCertUrl() }}">
                     {{ $client->cert_file }}
                 </a>
             </td>
@@ -70,7 +75,7 @@
         <tr>
             <th>{{ trans('messages.admin_vpnclients_key_file') }}</th>
             <td>
-                <a href="{{ $client->getKeyUrl() }}">
+                <a class="baselink" href="{{ $client->getKeyUrl() }}">
                     {{ $client->key_file }}
                 </a>
             </td>

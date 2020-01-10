@@ -1,8 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+    <h4>
+        {{ trans('messages.admin_vpnlogs_list') }}
+    </h4>
 
-    <div class="card mb-3">
+    <a class="toggleSearchBtn baselink boldlink text-right" href="javascript:void(0);" onclick="window.toggleDiv('search', 'vpnlogs')">
+        {{ trans('messages.toggle_search_text') }}
+    </a>
+    <div class="card mb-3" id="search">
         <div class="card-body">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
@@ -102,7 +108,7 @@
                     {{ $log->id }}
                 </td>
                 <td>
-                    <a href="{{ route('admin.vpnlogs.show', $log) }}">{{ $log->common_name }}</a>
+                    <a class="baselink" href="{{ route('admin.vpnlogs.show', $log) }}">{{ $log->common_name }}</a>
                 </td>
                 <td>
                     @if ($log->name !== 'null')
@@ -153,5 +159,9 @@
     </table>
 
     {{ $logs->links() }}
+
+    <script>
+        window.checkVisibiliti('search', 'vpnlogs');
+    </script>
 
 @endsection

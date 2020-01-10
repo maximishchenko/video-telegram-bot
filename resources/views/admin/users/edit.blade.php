@@ -2,10 +2,10 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
+    <h4>Данные пользователя</h4>
+    <div class="offsets-3 col-mds-6">
 
-        <h3 class="text-center">Данные пользователя</h3>
-        <hr>
+
         <form method="POST" action="{{ route('admin.users.update', $user) }}">
             @csrf
             @method('PUT')
@@ -63,7 +63,9 @@
 
             @if($user->isUser())
 
-            <h3 class="text-center">Доступ к группам</h3>
+            <h4>
+                {{ trans('messages.access_to_groups') }}
+            </h4>
             <hr>
 
             <div class="form-group">

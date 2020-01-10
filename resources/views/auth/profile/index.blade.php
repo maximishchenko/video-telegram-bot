@@ -38,7 +38,7 @@
                 {{ trans('messages.admin_users_email') }}
             </th>
             <td>
-                <a href="mailto://{{ $profile->email }}">{{ $profile->email }}</a>
+                <a class="baselink" href="mailto://{{ $profile->email }}">{{ $profile->email }}</a>
             </td>
         </tr>
         <tr>
@@ -46,7 +46,7 @@
                 {{ trans('messages.admin_users_phone') }}
             </th>
             <td>
-                <a href="callto://{{ $profile->phone }}">{{ $profile->phone }}</a>
+                <a class="baselink" href="callto://{{ $profile->phone }}">{{ $profile->phone }}</a>
             </td>
         </tr>
         <tr>

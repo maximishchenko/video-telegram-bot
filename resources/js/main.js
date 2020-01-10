@@ -59,3 +59,17 @@ window.fileInputGetName = function (labelID)
         nextSibling.innerText = fileName
     })
 }
+
+window.toggleDiv = function(id, storageItem) {
+    var divID = document.getElementById(id);
+    divID.style.display = (divID.style.display == 'block') ? 'none' : 'block';
+    localStorage.setItem(storageItem, divID.style.display);
+}
+window.checkVisibiliti = function(id, storageItem) {
+    var divID = document.getElementById(id);
+    if(localStorage.getItem(storageItem) == 'block') {
+        divID.style.display = 'block';
+    } else {
+        divID.style.display = 'none';
+    }
+}

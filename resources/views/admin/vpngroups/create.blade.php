@@ -2,7 +2,11 @@
 
 @section('content')
 
-    <div class="offset-3 col-md-6">
+    <h4>
+        {{ trans('messages.admin_vpngroups_create') }}
+    </h4>
+    <hr>
+
         <form method="POST" action="{{ route('admin.vpngroups.store') }}" autocomplete="off">
             @csrf
 
@@ -41,6 +45,5 @@
             </div>
         </form>
 
-    </div>
 
 @endsection
