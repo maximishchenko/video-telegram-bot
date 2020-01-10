@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\VpnLog;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -13,6 +15,18 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('admin.home');
+        $coordinates = DB::table('vpn_logs')
+            ->select('city','latitude','longitude')
+            ->where([
+                ['latitude', '<>', ''],
+                ['longitude', '<>', '']
+            ])
+            ->get()->toArray();
+//        $coordinates = VpnLog::where([
+//                ['latitude', '<>', ''],
+//                ['longitude', '<>', '']
+//            ])->get()->pluck('latitude','longitude');
+
+        return view('admin.home', compact('coordinates'));
     }
 }

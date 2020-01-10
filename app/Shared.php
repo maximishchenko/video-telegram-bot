@@ -39,8 +39,6 @@ class Shared
     public const CLIENT_PASSWORD_ERROR = 'cient-password-error';
 
 
-//
-
     public const CLIENT_CONNECTED = 'connected';
 
     public const CLIENT_DISCONNECTED = 'disconnected';
@@ -108,4 +106,13 @@ class Shared
         ];
     }
 
+
+    public static function checkLocalIp($ip)
+    {
+        if ( ! filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) )
+        {
+            return false;
+        }
+        return true;
+    }
 }
