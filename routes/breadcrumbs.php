@@ -3,6 +3,7 @@
 use App\Entity\User;
 use App\Entity\VpnClientsTemplates;
 use App\Entity\VpnGroups;
+use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
@@ -158,4 +159,10 @@ Breadcrumbs::register('admin.vpnclients.edit', function (BreadcrumbsGenerator $c
     $client = VpnClientsTemplates::findOrFail($id);
     $crumbs->parent('admin.vpnclients.show', $id);
     $crumbs->push(trans('messages.breadcrumbs_admin_vpnclients_update'), route('admin.vpnclients.edit', $client));
+});
+
+Breadcrumbs::register('admin.vpnlogs.show', function (BreadcrumbsGenerator $crumbs, $id) {
+    $log = VpnLog::findOrFail($id);
+    $crumbs->parent('admin.vpnlogs.index');
+    $crumbs->push($log->name, route('admin.vpnlogs.show', ['id' => $id]));
 });

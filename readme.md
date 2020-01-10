@@ -18,5 +18,6 @@ DOCUMENT_ROOT
 ip
 port
 
+* * * * * php /path/to/artisan schedule:run >>/dev/null 2>&1
 
 {{ print_r(Auth::user()->vpngroups()->allRelatedIds()->toArray()) }}

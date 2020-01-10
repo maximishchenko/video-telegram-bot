@@ -86,9 +86,11 @@
         <tr>
             <th>{{ trans('messages.admin_vpnlogs_id') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_common_name') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_name') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_group_id') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_event') }}</th>
-            <th>{{ trans('messages.admin_vpnlogs_ip') }}</th>
-            <th>{{ trans('messages.admin_vpnlogs_bytes_in_out') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_remote_ip') }}</th>
+            <th>{{ trans('messages.admin_vpnlogs_request_ip') }}</th>
             <th>{{ trans('messages.admin_vpnlogs_created_at') }}</th>
         </tr>
         </thead>
@@ -100,7 +102,17 @@
                     {{ $log->id }}
                 </td>
                 <td>
-                    {{ $log->getFullName() }}
+                    <a href="{{ route('admin.vpnlogs.show', $log) }}">{{ $log->common_name }}</a>
+                </td>
+                <td>
+                    @if ($log->name !== 'null')
+                        {{ $log->name }}
+                    @endif
+                </td>
+                <td>
+                    @if ($log->group !== 'null')
+                        {{ $log->group }}
+                    @endif
                 </td>
                 <td>
 
@@ -124,10 +136,14 @@
                     @endif
                 </td>
                 <td>
-                    {{ $log->getIpAddresses() }}
+                    @if ($log->remote_ip !== 'null')
+                        {{ $log->remote_ip }}
+                    @endif
                 </td>
                 <td>
-                    {{ $log->getBytesCount() }}
+                    @if ($log->request_ip !== 'null')
+                    {{ $log->request_ip }}
+                    @endif
                 </td>
                 <td>{{ $log->created_at }}</td>
 

@@ -5,6 +5,7 @@ namespace App\Console\Commands\Vpn;
 use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
+use App\Jobs\Admin\GetGeoIPInformation;
 use App\Shared;
 use Illuminate\Console\Command;
 
@@ -46,6 +47,7 @@ class LogAppendCommand extends Command
         if ($client) {
             if ($event == Shared::CLIENT_CONNECT) {
                 $client->connect_status = Shared::CLIENT_CONNECTED;
+                GetGeoIPInformation::dispatch($log);
             } elseif ($event == Shared::CLIENT_DISCONNECT) {
                 $client->connect_status = Shared::CLIENT_DISCONNECTED;
             }

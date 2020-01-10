@@ -172,5 +172,12 @@ return [
     'admin_btn_getconfig' => 'Скачать конфигурацию',
     'dashboard_manage_vpn_config' => 'Конфигурации клиентов',
     'admin_vpnlogs_ip' => 'IP исходный/выданный',
-    'admin_vpnlogs_bytes_in_out' => 'Отправлено/получено, байт'
+    'admin_vpnlogs_bytes_in_out' => 'Отправлено/получено, байт',
+    'admin_vpnlogs' => 'Журнал подключений',
+    'admin_vpnlogs_country' => 'Страна',
+    'admin_vpnlogs_region' => 'Регион',
+    'admin_vpnlogs_city' => 'Город',
+    'admin_vpnlogs_isp' => 'ISP',
+    'admin_vpnlogs_bytes_received' => 'Данных получено, байт',
+    'admin_vpnlogs_bytes_sent' => 'Данных отправлено, байт',
 ];

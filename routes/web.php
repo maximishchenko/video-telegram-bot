@@ -38,6 +38,7 @@ Route::group(
         Route::get('/vpnusers/{user}/password', 'VpnusersController@password')->name('vpnusers.password');
         Route::get('/vpnlogs', 'VpnLogController@index')->name('vpnlogs.index');
         Route::get('/vpnlogs/index', 'VpnLogController@index')->name('vpnlogs.index');
+        Route::get('/vpnlogs/{id}', 'VpnLogController@show')->name('vpnlogs.show');;
     }
 );
 

@@ -48,4 +48,10 @@ class VpnLogController extends Controller
         }
         return view('admin.vpnlogs.index', compact('logs'));
     }
+
+    public function show($id)
+    {
+        $log = VpnLog::findOrFail($id);
+        return view('admin.vpnlogs.show', compact('log'));
+    }
 }
