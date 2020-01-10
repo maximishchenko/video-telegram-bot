@@ -124,6 +124,7 @@ return [
     'cipher' => 'AES-256-CBC',
 
     'developer' => env('DEVELOPER_EMAIL', 'info@contoso.com'),
+    'maps_api_key' => env('MAPS_API_KEY', 'MAPS_API_KEY'),
 
     /*
     |--------------------------------------------------------------------------
