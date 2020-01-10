@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\Crud;
 use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
@@ -25,27 +26,13 @@ class VpnLogController extends Controller
             $query = VpnLog::whereIn('group', $groupNames);
         }
 
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
-        if (!empty($value = $request->get('common_name'))) {
-            $query->where('common_name', 'like', '%' . $value . '%');
-        }
-        if (!empty($value = $request->get('remote_ip'))) {
-            $query->where('remote_ip', 'like', '%' . $value . '%');
-        }
-        if (!empty($value = $request->get('request_ip'))) {
-            $query->where('request_ip', 'like', '%' . $value . '%');
-        }
-        if (!empty($value = $request->get('event'))) {
-            $query->where('event', $value);
-        }
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchLike($request, $query, 'common_name');
+        Crud::searchLike($request, $query, 'remote_ip');
+        Crud::searchLike($request, $query, 'request_ip');
+        Crud::searchEquals($request, $query, 'event');
 
-        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
-            $logs = $query->paginate($value);
-        } else {
-            $logs = $query->paginate(Shared::DEFAULT_PAGINATE);
-        }
+        $logs = Crud::getPageSize($request, $query);
         return view('admin.vpnlogs.index', compact('logs'));
     }
 

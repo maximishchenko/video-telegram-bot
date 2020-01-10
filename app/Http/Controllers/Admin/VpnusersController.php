@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\Crud;
 use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
 use App\Entity\VpnUsers;
@@ -35,33 +36,13 @@ class VpnusersController extends Controller
             $groups = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->pluck('id','name')->toArray();
         }
 
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
-        if (!empty($value = $request->get('group_id'))) {
-            $query->where('group_id', $value);
-        }
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchEquals($request, $query, 'group_id');
+        Crud::searchLike($request, $query, 'name');
+        Crud::searchLike($request, $query, 'login');
+        Crud::searchEquals($request, $query, 'status');
 
-        if (!empty($value = $request->get('name'))) {
-            $query->where('name', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('login'))) {
-            $query->where('login', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('status'))) {
-            $query->where('status', $value);
-        }
-
-        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
-            $users = $query->paginate($value);
-        } else {
-            $users = $query->paginate(Shared::DEFAULT_PAGINATE);
-        }
-
-
-
+        $users = Crud::getPageSize($request, $query);
         return view('admin.vpnusers.index', compact('users', 'groups'));
     }
 
@@ -78,26 +59,13 @@ class VpnusersController extends Controller
             $query = VpnUsers::whereIn('group_id', $groupIds)->orderBy('id', 'desc');
             $groups = VpnGroups::whereIn('id', $groupIds)->orderBy('name', 'ASC')->pluck('id','name')->toArray();
         }
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
-        if (!empty($value = $request->get('group_id'))) {
-            $query->where('group_id', $value);
-        }
 
-        if (!empty($value = $request->get('name'))) {
-            $query->where('name', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('login'))) {
-            $query->where('login', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('connect_status'))) {
-            $query->where('connect_status', $value);
-        }
-
-        $users = $query->paginate(Shared::DEFAULT_PAGINATE);
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchEquals($request, $query, 'group_id');
+        Crud::searchLike($request, $query, 'name');
+        Crud::searchLike($request, $query, 'login');
+        Crud::searchEquals($request, $query, 'connect_status');
+        $users = Crud::getPageSize($request, $query);
         return view('admin.vpnusers.status', compact('users', 'groups'));
     }
 

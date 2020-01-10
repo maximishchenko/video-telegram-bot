@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\Crud;
 use App\Entity\User;
 use App\Entity\VpnGroups;
 use App\Entity\VpnLog;
@@ -25,39 +26,16 @@ class UsersController extends Controller
     {
         $query = User::orderBy('id', 'desc');
 
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchLike($request, $query, 'name');
+        Crud::searchLike($request, $query, 'username');
+        Crud::searchLike($request, $query, 'email');
+        Crud::searchLike($request, $query, 'phone');
+        Crud::searchEquals($request, $query, 'role');
+        Crud::searchEquals($request, $query, 'status');
 
-        if (!empty($value = $request->get('name'))) {
-            $query->where('name', 'like', '%' . $value . '%');
-        }
+        $users = Crud::getPageSize($request, $query);
 
-        if (!empty($value = $request->get('username'))) {
-            $query->where('username', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('email'))) {
-            $query->where('email', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('phone'))) {
-            $query->where('phone', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('role'))) {
-            $query->where('role', $value);
-        }
-
-        if (!empty($value = $request->get('status'))) {
-            $query->where('status', $value);
-        }
-
-        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
-            $users = $query->paginate($value);
-        } else {
-            $users = $query->paginate(Shared::DEFAULT_PAGINATE);
-        }
         return view('admin.users.index', compact('users'));
     }
 

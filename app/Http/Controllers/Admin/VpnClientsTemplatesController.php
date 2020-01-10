@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Entity\Crud;
 use App\Entity\VpnClientsTemplates;
-use App\Entity\VpnGroups;
-use App\Entity\VpnLog;
-use App\Entity\VpnUsers;
 use App\Http\Requests\Admin\VpnClientsTemplates\CreateRequest;
 use App\Shared;
 use Illuminate\Http\Request;
@@ -24,45 +22,18 @@ class VpnClientsTemplatesController extends Controller
 
     public function index(Request $request)
     {
-
         if (Auth::user()->can('admin')) {
             $query = VpnClientsTemplates::orderBy('id', 'desc');
         } else {
             $query = VpnClientsTemplates::where('status', Shared::STATUS_ACTIVE)->orderBy('id', 'desc');
         }
-
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
-
-        if (!empty($value = $request->get('name'))) {
-            $query->where('name', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('protocol'))) {
-            $query->where('protocol', $value);
-        }
-
-        if (!empty($value = $request->get('port'))) {
-            $query->where('port', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('host'))) {
-            $query->where('host', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('status'))) {
-            $query->where('status', $value);
-        }
-
-        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
-            $clients = $query->paginate($value);
-        } else {
-            $clients = $query->paginate(Shared::DEFAULT_PAGINATE);
-        }
-
-
-
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchLike($request, $query, 'name');
+        Crud::searchEquals($request, $query, 'protocol');
+        Crud::searchLike($request, $query, 'port');
+        Crud::searchLike($request, $query, 'host');
+        Crud::searchEquals($request, $query, 'status');
+        $clients = Crud::getPageSize($request, $query);
         return view('admin.vpnclients.index', compact('clients'));
     }
 
@@ -223,7 +194,6 @@ class VpnClientsTemplatesController extends Controller
         $headers = [
             'Content-type' => 'text/plain',
             'Content-Disposition' => sprintf('attachment; filename="%s"', $fileName),
-//            'Content-Length' => sizeof($content)
         ];
 
         return Response::make($content, 200, $headers);

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Entity\User;
+use App\Entity\Crud;
 use App\Entity\VpnGroups;
 use App\Http\Requests\Admin\VpnGroups\CreateRequest;
 use App\Http\Requests\Admin\VpnGroups\UpdateRequest;
-use App\Shared;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -31,23 +29,11 @@ class VpngroupsController extends Controller
             $query = VpnGroups::whereIn('id', $records)->orderBy('id', 'desc');
         }
 
-        if (!empty($value = $request->get('id'))) {
-            $query->where('id', $value);
-        }
+        Crud::searchEquals($request, $query, 'id');
+        Crud::searchLike($request, $query, 'name');
+        Crud::searchEquals($request, $query, 'status');
+        $groups = Crud::getPageSize($request, $query);
 
-        if (!empty($value = $request->get('name'))) {
-            $query->where('name', 'like', '%' . $value . '%');
-        }
-
-        if (!empty($value = $request->get('status'))) {
-            $query->where('status', $value);
-        }
-
-        if (!empty($value = $request->get('pageSize')) && (is_numeric($value))) {
-            $groups = $query->paginate($value);
-        } else {
-            $groups = $query->paginate(Shared::DEFAULT_PAGINATE);
-        }
         return view('admin.vpngroups.index', compact('groups'));
     }
 
