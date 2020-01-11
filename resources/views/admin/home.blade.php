@@ -114,18 +114,27 @@
         function initMap() {
             var lat = 44.0486;
             var lng = 43.0594;
+
+
+            bounds  = new google.maps.LatLngBounds();
+
+
             var json = {!! json_encode($coordinates) !!};
             var myLatLng = {lat: lat, lng: lng};
 
             var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 10,
-                mapTypeId: google.maps.MapTypeId.ROADMAP,
-                center: myLatLng
+                mapTypeId: google.maps.MapTypeId.TERRAIN,
+                disableDefaultUI: true,
             });
 
+
             for (var i = 0, length = json.length; i < length; i++) {
+
                 var data = json[i],
                     latLng = new google.maps.LatLng(data.latitude, data.longitude);
+
+
+                bounds.extend (latLng);
 
                 var marker = new google.maps.Marker({
                     position: latLng,
@@ -133,6 +142,8 @@
                     title: data.city
                 });
             }
+            map.fitBounds(bounds);
+            map.panToBounds(bounds);
         }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key={{ config('app.maps_api_key', 'MAPS_API_KEY') }}&callback=initMap" async defer></script>

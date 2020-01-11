@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Shared;
 use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class VpnLog extends Model
@@ -73,7 +72,7 @@ class VpnLog extends Model
                 if($response->getStatusCode() == 200) {
                     $body = $response->getBody();
                     $arrBody = json_decode($body);
-                    if ($arrBody->data->geo->asn) {
+                    if ($arrBody->data->geo->rdns) {
                         $this->update([
                             'rdns' => $arrBody->data->geo->rdns,
                             'asn' => $arrBody->data->geo->asn,

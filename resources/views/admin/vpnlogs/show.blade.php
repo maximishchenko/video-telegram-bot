@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.vpnlogs.index') }}">
+                {{ trans('messages.admin_vpnlogs') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ $log->id }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
 
@@ -10,6 +27,11 @@
         <a href="{{ route('admin.vpnlogs.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_vpnlogs') }}
         </a>
+        @if ($log->connected() and empty($log->rdns))
+        <a href="{{ route('admin.vpnlogs.getipinfo', ['id' => $log->id]) }}" class="btn btn-dark btn-sm mr-1">
+            {{ trans('messages.admin_vpnlogs_getipinfo') }}
+        </a>
+        @endif
     </div>
 
     <div class="row">
@@ -67,31 +89,51 @@
         </tr>
         @if ($log->remote_ip !== 'null')
         <tr>
-            <th>{{ trans('messages.admin_vpnlogs_remote_ip') }}</th>
-            <td>{{ $log->remote_ip }}</td>
+            <th>
+                {{ trans('messages.admin_vpnlogs_remote_ip') }}
+            </th>
+            <td>
+                {{ $log->remote_ip }}
+            </td>
         </tr>
         @endif
         @if ($log->request_ip !== 'null')
             <tr>
-                <th>{{ trans('messages.admin_vpnlogs_request_ip') }}</th>
-                <td>{{ $log->request_ip }}</td>
+                <th>
+                    {{ trans('messages.admin_vpnlogs_request_ip') }}
+                </th>
+                <td>
+                    {{ $log->request_ip }}
+                </td>
             </tr>
         @endif
         @if ($log->bytes_received !== 'null')
             <tr>
-                <th>{{ trans('messages.admin_vpnlogs_bytes_received') }}</th>
-                <td>{{ $log->bytes_received }}</td>
+                <th>
+                    {{ trans('messages.admin_vpnlogs_bytes_received') }}
+                </th>
+                <td>
+                    {{ \App\Shared::formatBytes($log->bytes_received) }}
+                </td>
             </tr>
         @endif
         @if ($log->bytes_sent !== 'null')
             <tr>
-                <th>{{ trans('messages.admin_vpnlogs_bytes_sent') }}</th>
-                <td>{{ $log->bytes_sent }}</td>
+                <th>
+                    {{ trans('messages.admin_vpnlogs_bytes_sent') }}
+                </th>
+                <td>
+                    {{ \App\Shared::formatBytes($log->bytes_sent) }}
+                </td>
             </tr>
         @endif
         <tr>
-            <th>{{ trans('messages.admin_vpnlogs_created_at') }}</th>
-            <td>{{ $log->created_at }}</td>
+            <th>
+                {{ trans('messages.admin_vpnlogs_created_at') }}
+            </th>
+            <td>
+                {{ $log->created_at }}
+            </td>
         </tr>
         </tbody>
     </table>
@@ -156,7 +198,9 @@
 
                 var map = new google.maps.Map(document.getElementById('map'), {
                     zoom: 8,
-                    center: myLatLng
+                    center: myLatLng,
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,
+                    disableDefaultUI: true,
                 });
 
                 var marker = new google.maps.Marker({

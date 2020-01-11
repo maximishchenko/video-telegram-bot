@@ -19,12 +19,16 @@ $factory->define(VpnLog::class, function (Faker $faker) {
 
     $request_ip = ($event == Shared::CLIENT_CONNECT) ? $faker->localIpv4 : null;
     $remote_ip = ($event == Shared::CLIENT_CONNECT) ? $faker->ipv4 : null;
+    $bytes_received = ($event == Shared::CLIENT_DISCONNECT) ? $faker->unixTime : null;
+    $bytes_sent = ($event == Shared::CLIENT_DISCONNECT) ? $faker->unixTime : null;
     return [
         'common_name' => $common_name,
         'name' => $user_id->name,
         'event' => $event,
         'group' => $group->name,
         'remote_ip' => $request_ip,
-        'request_ip' => $remote_ip
+        'request_ip' => $remote_ip,
+        'bytes_received' => $bytes_received,
+        'bytes_sent' => $bytes_sent
     ];
 });

@@ -217,4 +217,5 @@ return [
     'admin_vpnusers_activated' => 'Клиент активирован',
     'admin_vpnclients_blocked' => 'Конфигурация клиента заблокирована',
     'admin_vpnclients_activated' => 'Конфигурация клиента активирована',
+    'admin_vpnlogs_getipinfo' => 'Получить сведения об ip-адресе',
 ];

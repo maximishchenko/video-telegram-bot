@@ -41,4 +41,11 @@ class VpnLogController extends Controller
         $log = VpnLog::findOrFail($id);
         return view('admin.vpnlogs.show', compact('log'));
     }
+
+    public function getipinfo($id)
+    {
+        $log = VpnLog::findOrFail($id);
+        $log->getGeoIp();
+        return redirect()->route('admin.vpnlogs.show', $log);
+    }
 }
