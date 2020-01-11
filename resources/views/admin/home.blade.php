@@ -61,7 +61,7 @@
         }
 
         $.ajax({
-            url:"/api/traffic/sourcemap",
+            url:"/api/v1/traffic/sourcemap",
             dataType: "json",
             success:function(data){
                 initMap(data);
@@ -73,7 +73,7 @@
 
 
         $.ajax({
-            url:"/api/traffic/client",
+            url:"/api/v1/traffic/client",
             dataType: "json",
             success:function(data){
                 var ctx = document.getElementById('trafficClient').getContext('2d');
@@ -104,7 +104,7 @@
 
 
         $.ajax({
-            url:"/api/traffic/summary",
+            url:"/api/v1/traffic/summary",
             dataType: "json",
             success:function(data){
                 var ctx = document.getElementById('trafficSummary').getContext('2d');
