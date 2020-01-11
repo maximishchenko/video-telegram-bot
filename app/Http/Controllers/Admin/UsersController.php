@@ -52,7 +52,7 @@ class UsersController extends Controller
             $request['email'],
             $request['phone']
         );
-        return redirect()->route('admin.users.show', $user);
+        return redirect()->route('admin.users.show', $user)->with('success', trans('messages.record_added'));
     }
 
     public function show(User $user)
@@ -71,25 +71,31 @@ class UsersController extends Controller
         $user->update($request->only(['name', 'email', 'status', 'phone', 'role']));
         $user->vpngroups()->sync( $request['vpngroups'] );
 
-        return redirect()->route('admin.users.show', $user);
+        return redirect()->route('admin.users.show', $user)->with('info', trans('messages.record_updated'));
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('admin.users.index');
+        return redirect()->route('admin.users.index')->with('error', trans('messages.record_deleted'));
     }
 
     public function changeStatus(User $user)
     {
         if($user->isActive()) {
             $user->block();
+            $status = 'error';
+            $message = trans('messages.user_blocked');
         } elseif($user->isBlocked()) {
             $user->activate();
+            $status = 'success';
+            $message = trans('messages.user_activated');
         } else {
             $user->verify();
+            $status = 'success';
+            $message = trans('messages.user_verified');
         }
-        return redirect()->route('admin.users.show', $user);
+        return redirect()->route('admin.users.show', $user)->with($status, $message);
     }
 
     public function password(User $user)
@@ -102,6 +108,6 @@ class UsersController extends Controller
         $user = $user->changePassword(
                 $request['password']
             );
-        return redirect()->route('admin.users.show', $user);
+        return redirect()->route('admin.users.show', $user)->with('info', trans('messages.password_changed'));
     }
 }

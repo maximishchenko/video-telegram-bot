@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.vpnclients.index') }}">
+                {{ trans('messages.admin_vpnclients') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ trans('messages.admin_vpnclients_create') }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
     <h4>
@@ -116,6 +133,10 @@
                     {{ trans('messages.btn_save') }}
                 </button>
 
+
+                <a class="btn btn-dark btn-sm" onclick="window.backUrl()" href="javascript:void(0);">
+                    {{ trans('messages.go_back') }}
+                </a>
                 <a class="btn btn-dark btn-sm" href="{{ route('admin.vpnusers.index') }}">
                     {{ trans('messages.admin_vpnusers') }}
                 </a>

@@ -1,12 +1,37 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.users.index') }}">
+                {{ trans('messages.admin_users') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ $user->name }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
-    <h4>{{ trans('messages.vpnusers_data') }}</h4>
+    <h4>
+        {{ trans('messages.vpnusers_data', ['name' => $user->name]) }}
+    </h4>
+
+    <hr>
 
     <div class="d-flex flex-row mb-3">
+
+        <a class="btn btn-dark btn-sm mr-1" onclick="window.backUrl()" href="javascript:void(0);">
+            {{ trans('messages.go_back') }}
+        </a>
         <a href="{{ route('admin.users.index') }}" class="btn btn-dark btn-sm mr-1">
-            {{ trans('messages.breadcrumbs_admin_users') }}
+            {{ trans('messages.admin_users') }}
         </a>
         <a href="{{ route('admin.users.edit', $user) }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_btn_update') }}
@@ -32,8 +57,8 @@
         </form>
     </div>
 
-
-
+    <div class="row">
+    <div class="col">
     <table class="table table table-bordered">
         <tbody>
             <tr>
@@ -99,17 +124,19 @@
     </table>
 
 
-    <h4>
+    </div>
+    <div class="col">
+
+    <h5>
         {{ trans('messages.access_to_groups') }}
-    </h4>
-    <hr>
+    </h5>
 
     @if ($user->isUser())
+        @if ($user->vpngroups()->exists())
         <table class="table table-bordered table-striped">
             <thead>
                 <th>{{ trans('messages.admin_vpngroups_id') }}</th>
                 <th>{{ trans('messages.admin_vpngroups_name') }}</th>
-                <th>{{ trans('messages.admin_vpngroups_comment') }}</th>
                 <th>{{ trans('messages.admin_vpngroups_status') }}</th>
             </thead>
             <tbody>
@@ -120,9 +147,6 @@
                     </td>
                     <td>
                         {{ $group->name }}
-                    </td>
-                    <td>
-                        {{ $group->comment }}
                     </td>
                     <td>
                         @if ($group->isActive())
@@ -136,10 +160,20 @@
             @endforeach
             </tbody>
         </table>
+        @else
+            <div class="alert alert-info">
+                {{ trans('messages.no_access_to_any_groups') }}
+            </div>
+        @endif
     @endif
     @if ($user->isAdmin())
-        <hr>
-        {{ trans('messages.admin_access_to_all_groups') }}
+        <div class="alert alert-info">
+            {{ trans('messages.admin_access_to_all_groups') }}
+        </div>
     @endif
+
+    </div>
+    </div>
+
 
 @endsection

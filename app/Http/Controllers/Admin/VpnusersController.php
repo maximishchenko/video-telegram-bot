@@ -91,7 +91,7 @@ class VpnusersController extends Controller
             $request['group_id'],
             $request['comment']
         );
-        return redirect()->route('admin.vpnusers.show', $user);
+        return redirect()->route('admin.vpnusers.show', $user)->with('success', trans('messages.record_added'));
     }
 
     public function show($id)
@@ -117,14 +117,14 @@ class VpnusersController extends Controller
         $user = VpnUsers::findOrFail($id);
         $user->checkClientAccess();
         $user->update($request->only(['name', 'comment']));
-        return redirect()->route('admin.vpnusers.show', $user);
+        return redirect()->route('admin.vpnusers.show', $user)->with('info', trans('messages.record_updated'));
     }
 
     public function destroy($id)
     {
         $user = VpnUsers::findOrFail($id);
         $user->delete();
-        return redirect()->route('admin.vpnusers.index');
+        return redirect()->route('admin.vpnusers.index')->with('error', trans('messages.record_deleted'));
     }
 
     public function changeStatus($id)
@@ -133,10 +133,14 @@ class VpnusersController extends Controller
         $user->checkClientAccess();
         if($user->isActive()) {
             $user->block();
+            $status = 'error';
+            $message = trans('messages.admin_vpnusers_blocked');
         } elseif($user->isBlocked()) {
             $user->activate();
+            $status = 'success';
+            $message = trans('messages.admin_vpnusers_activated');
         }
-        return redirect()->route('admin.vpnusers.show', $user);
+        return redirect()->route('admin.vpnusers.show', $user)->with($status, $message);
     }
 
     public function password(VpnUsers $user)
@@ -151,6 +155,6 @@ class VpnusersController extends Controller
         $user = $user->changePassword(
             $request['password_plain']
         );
-        return redirect()->route('admin.vpnusers.show', $user);
+        return redirect()->route('admin.vpnusers.show', $user)->with('info', trans('messages.password_changed'));
     }
 }

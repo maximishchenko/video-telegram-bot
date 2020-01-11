@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ trans('messages.admin_vpnclients') }}
+        </li>
+    </ul>
+@endsection
+
 @section('content')
 
     <h4>

@@ -1,5 +1,17 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ trans('messages.admin_vpnusers') }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
     <h4>
@@ -9,8 +21,7 @@
     <a class="toggleSearchBtn baselink boldlink text-right" href="javascript:void(0);" onclick="window.toggleDiv('search', 'vpnusers')">
         {{ trans('messages.toggle_search_text') }}
     </a>
-    <div class="card mb-3" id="search">
-        <div class="card-body">
+    <div class="mb-3" id="search">
             <form action="?" method="GET" autocomplete="off">
                 <div class="row">
                     <div class="col-sm-3">
@@ -72,7 +83,6 @@
                     </div>
                 </div>
             </form>
-        </div>
     </div>
 
     <div class="d-flexs flex-rows mbs-3">
@@ -107,7 +117,7 @@
         </div>
     </div>
 
-
+    <hr>
 
 
     <table class="table table-bordered">

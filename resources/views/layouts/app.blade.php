@@ -20,9 +20,8 @@
     @include('layouts.partials.header')
     <main class="app-content py-4">
         <div class="container">
-            @section('breadcrumbs', Breadcrumbs::render())
             @yield('breadcrumbs')
-            @include('flash::message')
+            @include('layouts.partials.flash')
             @include('layouts.partials.tabs')
             @yield('content')
         </div>

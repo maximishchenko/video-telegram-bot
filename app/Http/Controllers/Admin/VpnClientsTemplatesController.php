@@ -74,7 +74,7 @@ class VpnClientsTemplatesController extends Controller
             $keyFileName,
             $request['comment']
         );
-        return redirect()->route('admin.vpnclients.show', ['id' => $user->id]);
+        return redirect()->route('admin.vpnclients.show', ['id' => $user->id])->with('success', trans('messages.record_added'));
     }
 
     public function show($id)
@@ -131,7 +131,7 @@ class VpnClientsTemplatesController extends Controller
         }
 
         $client->save();
-        return redirect()->route('admin.vpnclients.show', $client);
+        return redirect()->route('admin.vpnclients.show', $client)->with('info', trans('messages.record_updated'));
     }
 
     public function destroy($id)
@@ -141,7 +141,7 @@ class VpnClientsTemplatesController extends Controller
         Storage::disk('public')->delete($client->getCertPath());
         Storage::disk('public')->delete($client->getKeyPath());
         $client->delete();
-        return redirect()->route('admin.vpnclients.index');
+        return redirect()->route('admin.vpnclients.index')->with('error', trans('messages.record_deleted'));
     }
 
     public function changeStatus($id)
@@ -149,10 +149,14 @@ class VpnClientsTemplatesController extends Controller
         $client = VpnClientsTemplates::findOrFail($id);
         if($client->isActive()) {
             $client->block();
+            $status = 'error';
+            $message = trans('messages.admin_vpnclients_blocked');
         } elseif($client->isBlocked()) {
             $client->activate();
+            $status = 'success';
+            $message = trans('messages.admin_vpnclients_activated');
         }
-        return redirect()->route('admin.vpnclients.show', $client);
+        return redirect()->route('admin.vpnclients.show', $client)->with($status, $message);
     }
 
     public function config($id)

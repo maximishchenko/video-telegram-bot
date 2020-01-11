@@ -73,3 +73,12 @@ window.checkVisibiliti = function(id, storageItem) {
         divID.style.display = 'none';
     }
 }
+
+window.backUrl = function() {
+    if (document.referrer.indexOf(window.location.host) !== -1) {
+        history.go(-1); return false;
+    }
+    else {
+        window.location = window.location.origin;
+    }
+}

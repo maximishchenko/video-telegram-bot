@@ -1,5 +1,27 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.vpngroups.index') }}">
+                {{ trans('messages.breadcrumbs_admin_vpngroups') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.vpngroups.show', $group) }}">
+                {{ $group->name }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ trans('messages.admin_btn_update') }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
     <h4>

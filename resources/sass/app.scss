@@ -34,7 +34,11 @@ a.baselink {
     color: #000;
 }
 a.baselink:hover, a.baselink:focus {
-    color: #c03;
+    color: #c03 !important;
+    text-decoration: none;
+}
+a.baselink:hover {
+    color: #000;
     text-decoration: none;
 }
 .right {

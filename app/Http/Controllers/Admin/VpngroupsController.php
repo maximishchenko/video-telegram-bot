@@ -48,7 +48,7 @@ class VpngroupsController extends Controller
             $request['name'],
             $request['comment']
         );
-        return redirect()->route('admin.vpngroups.show', $group);
+        return redirect()->route('admin.vpngroups.show', $group)->with('success', trans('messages.record_added'));
     }
 
     public function show($id)
@@ -70,14 +70,14 @@ class VpngroupsController extends Controller
         $group = VpnGroups::findOrFail($id);
         $group->checkGroupAccess();
         $group->update($request->only(['name', 'comment']));
-        return redirect()->route('admin.vpngroups.show', $group);
+        return redirect()->route('admin.vpngroups.show', $group)->with('info', trans('messages.record_updated'));
     }
 
     public function destroy($id)
     {
         $group = VpnGroups::findOrFail($id);
         $group->delete();
-        return redirect()->route('admin.vpngroups.index');
+        return redirect()->route('admin.vpngroups.index')->with('error', trans('messages.record_deleted'));
     }
 
 
@@ -87,9 +87,13 @@ class VpngroupsController extends Controller
         $group->checkGroupAccess();
         if($group->isActive()) {
             $group->block();
+            $status = 'error';
+            $message = trans('messages.vpngroup_blocked');
         } elseif($group->isBlocked()) {
             $group->activate();
+            $status = 'success';
+            $message = trans('messages.vpngroup_activated');
         }
-        return redirect()->route('admin.vpngroups.show', $group);
+        return redirect()->route('admin.vpngroups.show', $group)->with($status, $message);
     }
 }

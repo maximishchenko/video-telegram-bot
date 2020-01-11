@@ -1,5 +1,27 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.users.index') }}">
+                {{ trans('messages.admin_users') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.users.show', $user) }}">
+                {{ $user->name }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ trans('messages.admin_btn_update') }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
     <h4>Данные пользователя</h4>
@@ -85,8 +107,9 @@
                     {{ trans('messages.btn_save') }}
                 </button>
 
-                <a href="{{ route('admin.users.index') }}" class="btn btn-dark btn-sm">
-                    {{ trans('messages.breadcrumbs_admin_users') }}
+
+                <a class="btn btn-dark btn-sm mr-1" onclick="window.backUrl()" href="javascript:void(0);">
+                    {{ trans('messages.go_back') }}
                 </a>
                 <a href="{{ route('admin.users.show', $user) }}" class="btn btn-dark btn-sm">
                     {{ trans('messages.to_view') }}

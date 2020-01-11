@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('breadcrumbs')
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('home') }}">
+                {{ trans('messages.breadcrumbs_homelink') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="baselink" href="{{ route('admin.vpnusers.index') }}">
+                {{ trans('messages.admin_vpnusers') }}
+            </a>
+        </li>
+        <li class="breadcrumb-item active">
+            {{ $user->name }}
+        </li>
+    </ul>
+@endsection
 @section('content')
 
     <h4>
@@ -8,6 +25,9 @@
     <hr>
 
     <div class="d-flex flex-row mb-3">
+        <a class="btn btn-dark btn-sm mr-1" onclick="window.backUrl()" href="javascript:void(0);">
+            {{ trans('messages.go_back') }}
+        </a>
         <a href="{{ route('admin.vpnusers.index') }}" class="btn btn-dark btn-sm mr-1">
             {{ trans('messages.admin_vpnusers') }}
         </a>
