@@ -218,4 +218,5 @@ return [
     'admin_vpnclients_blocked' => 'Конфигурация клиента заблокирована',
     'admin_vpnclients_activated' => 'Конфигурация клиента активирована',
     'admin_vpnlogs_getipinfo' => 'Получить сведения об ip-адресе',
+    'connections_src' => 'Источники подключений',
 ];

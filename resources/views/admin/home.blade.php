@@ -14,28 +14,33 @@
             <canvas id="trafficClient"></canvas>
         </div>
     </div>
-    <div class="row">
 
+    <hr>
+
+    <div class="rows">
+        <div class="col-6">
+            <h5>
+                {{ trans('messages.connections_src') }}
+            </h5>
+            <div id="map" style="height: 400px"></div>
+        </div>
+        <div class="col-6">
+        </div>
     </div>
 
-    @if(!empty($coordinates))
-        <div id="map" style="height: 400px"></div>
-    @endif
+
 
     <script>
         var map;
-        function initMap() {
+        function initMap(data) {
             bounds  = new google.maps.LatLngBounds();
-
-
-            var json = {!! json_encode($coordinates) !!};
 
             var map = new google.maps.Map(document.getElementById('map'), {
                 mapTypeId: google.maps.MapTypeId.TERRAIN,
                 disableDefaultUI: true,
             });
 
-
+            var json = data;
             for (var i = 0, length = json.length; i < length; i++) {
 
                 var data = json[i],
@@ -47,13 +52,24 @@
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map,
-                    title: data.city
+                    title: data.latitude
                 });
             }
+
             map.fitBounds(bounds);
             map.panToBounds(bounds);
         }
 
+        $.ajax({
+            url:"/api/traffic/sourcemap",
+            dataType: "json",
+            success:function(data){
+                initMap(data);
+            },
+            error:function(data) {
+                console.log('something went wrong');
+            }
+        });
 
 
         $.ajax({
