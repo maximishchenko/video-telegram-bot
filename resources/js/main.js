@@ -82,3 +82,9 @@ window.backUrl = function() {
         window.location = window.location.origin;
     }
 }
+
+window.getColumn = function(array, column) {
+    return array.map(function(row) {
+        return row[column];
+    });
+}

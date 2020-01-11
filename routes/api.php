@@ -16,3 +16,6 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::get('/traffic/summary', 'Api\LogController@trafficSummary');
+Route::get('/traffic/client', 'Api\LogController@trafficClient');
+Route::get('/traffic/sourcemap', 'Api\LogController@traficSourcesMap');

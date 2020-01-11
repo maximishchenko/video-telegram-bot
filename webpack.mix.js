@@ -16,5 +16,8 @@ mix
     .setResourceRoot('build')
     .js('resources/js/app.js', 'js')
     .js('resources/js/main.js', 'js')
+    .autoload({
+        jquery: ['$', 'window.jQuery', 'jQuery'],
+    })
     .sass('resources/sass/app.scss', 'css')
     .version();

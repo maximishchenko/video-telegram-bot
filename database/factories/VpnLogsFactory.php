@@ -29,6 +29,7 @@ $factory->define(VpnLog::class, function (Faker $faker) {
         'remote_ip' => $request_ip,
         'request_ip' => $remote_ip,
         'bytes_received' => $bytes_received,
-        'bytes_sent' => $bytes_sent
+        'bytes_sent' => $bytes_sent,
+        'created_at' => \Carbon\Carbon::now()->subDays(rand(1, 500)),
     ];
 });
