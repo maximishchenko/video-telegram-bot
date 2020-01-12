@@ -30,17 +30,21 @@ window.maskphone = function(textInputID, checkboxID) {
     }
 };
 
-window.pwd = function (inputID, classID) {
-    var element = document.getElementById(inputID);
-    if (element.classList.contains(classID)) {
-        element.classList.remove(classID);
-    } else {
-        element.classList.add(classID);
-    }
 
+window.pwd = function(id) {
+    var input = document.getElementById(id);
+    if (input.type === 'password') {
+        input.type = 'text';
+    } else {
+        input.type = 'password';
+    }
 }
 
-
+/**
+ * Изменяет количество элементов на странице
+ * @param name
+ * @param value
+ */
 window.pager = function (name, value) {
     var url = new URL(window.location.href);
     var query_string = url.search;
@@ -51,6 +55,10 @@ window.pager = function (name, value) {
     window.location.href = new_url;
 }
 
+/**
+ * Добавляет имя файла к file-input
+ * @param labelID
+ */
 window.fileInputGetName = function (labelID)
 {
     document.getElementById(labelID).addEventListener('change',function(e){
@@ -60,11 +68,23 @@ window.fileInputGetName = function (labelID)
     })
 }
 
+/**
+ * Показывает/скрывает элемент (запоминает положение при перезагрузке страницы)
+ * @param id
+ * @param storageItem
+ */
 window.toggleDiv = function(id, storageItem) {
     var divID = document.getElementById(id);
     divID.style.display = (divID.style.display == 'block') ? 'none' : 'block';
     localStorage.setItem(storageItem, divID.style.display);
 }
+
+/**
+ * Проверяет видимость элемента
+ * @see toggleDiv()
+ * @param id
+ * @param storageItem
+ */
 window.checkVisibiliti = function(id, storageItem) {
     var divID = document.getElementById(id);
     if(localStorage.getItem(storageItem) == 'block') {
@@ -87,4 +107,13 @@ window.getColumn = function(array, column) {
     return array.map(function(row) {
         return row[column];
     });
+}
+
+window.copyDivToClipboard = function(elem) {
+    var range = document.createRange();
+    range.selectNode(document.getElementById(elem));
+    window.getSelection().removeAllRanges();
+    window.getSelection().addRange(range);
+    document.execCommand("copy");
+    window.getSelection().removeAllRanges();
 }

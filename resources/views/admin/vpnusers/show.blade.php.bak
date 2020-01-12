@@ -108,17 +108,9 @@
                 {{ trans('messages.admin_vpnusers_password_plain') }}
             </th>
             <td>
-                <div class="input-group">
-                    <input id="password" type="password" class="form-control" value="{{ $user->password_plain }}" disabled>
-                    <div class="input-group-append">
-                        <a href="javascript:void(0);" class="btn btn-outline-secondary" onclick="window.pwd('password')">
-                            {{ trans('messages.show_hide') }}
-                        </a>
-                        <a href="javascript:void(0);" class="btn btn-outline-secondary" onclick="window.copyDivToClipboard('password')">
-                            {{ trans('messages.do_copy') }}
-                        </a>
-                    </div>
-                </div>
+                <span id="msk" class="msk">{{ $user->password_plain }}</span>
+                &nbsp; <input id="togglepwd" type="checkbox" class="custom-control-inputs" onchange="window.pwd('msk', 'msk')">&nbsp; {{ trans('messages.toggle_pwd') }}
+
             </td>
         </tr>
         <tr>
@@ -187,5 +179,36 @@
             </table>
         </div>
     </div>
+
+
+    <script>
+        function pwd(inputID, classID) {
+            var element = document.getElementById(inputID);
+            if (element.classList.contains(classID)) {
+                element.classList.remove(classID);
+            } else {
+                element.classList.add(classID);
+            }
+
+        }
+    </script>
+    <script>
+        function copyDivToClipboard(elem) {
+            var range = document.createRange();
+            range.selectNode(document.getElementById(elem));
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand("copy");
+            window.getSelection().removeAllRanges();
+        }
+        function toggleElementById(id) {
+            var x = document.getElementById(id);
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
 @endsection
