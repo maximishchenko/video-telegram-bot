@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('/v1/traffic/summary', 'Api\v1\LogController@trafficSummary');
 Route::get('/v1/traffic/client', 'Api\v1\LogController@trafficClient');
 Route::get('/v1/traffic/sourcemap', 'Api\v1\LogController@traficSourcesMap');
+Route::get('/v1/traffic/calendar', 'Api\v1\LogController@eventsCalendar');

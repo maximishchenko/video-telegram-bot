@@ -219,4 +219,7 @@ return [
     'admin_vpnclients_activated' => 'Конфигурация клиента активирована',
     'admin_vpnlogs_getipinfo' => 'Получить сведения об ip-адресе',
     'connections_src' => 'Источники подключений',
+    'traffic_summary' => 'Объем трафика (последние 30 дней), байт',
+    'traffic_summary_client' => 'Объем трафика клиентов (последние 30 дней), байт',
+    'log_events' => 'События журнала',
 ];

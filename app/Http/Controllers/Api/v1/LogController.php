@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
 
 class LogController extends Controller
 {
@@ -57,5 +58,27 @@ class LogController extends Controller
             ])
             ->get()->toArray();
         return $coordinates;
+    }
+
+    public function eventsCalendar()
+    {
+        $start = $id = Input::get('start');
+        $end = $id = Input::get('end');
+        $events = DB::table('vpn_logs')
+            ->select(
+                DB::raw('created_at as start'),
+                DB::raw('created_at as end'),
+                DB::raw('common_name as title'),
+                DB::raw('event as event'),
+//                DB::raw('(CASE
+//                    WHEN (event = "client-connect") THEN "green"
+//                    WHEN (event = "client-disconnect") THEN "orange"
+//                    ELSE "red" END) as color'
+//                ),
+                DB::raw('id as id')
+            )
+            ->whereBetween('created_at', [$start, $end])
+            ->get()->toArray();
+        return $events;
     }
 }

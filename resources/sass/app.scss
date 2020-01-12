@@ -47,3 +47,84 @@ a.baselink:hover {
 }
 
 .msk{ -webkit-text-security: disc !important; }
+
+//
+
+.cbp-spmenu {
+    background: #2A3744;
+    position: fixed;
+}
+
+.cbp-spmenu h3 {
+    color: #fff;
+    font-size: 1.2em;
+    padding: 20px;
+    margin: 0;
+    font-weight: 300;
+    background: #2A3744;
+}
+
+.cbp-spmenu a.cbp-title {
+    background: #2A3744;
+    color: #fff;
+}
+.cbp-spmenu a.cbp-title:hover {
+    background: #2A3744;
+    color: #fff;
+}
+
+.cbp-spmenu a.active {
+    background: #fff;
+    color: #2A3744;
+    text-decoration: none;
+}
+.cbp-spmenu a {
+    display: block;
+    color: #fff;
+    //font-size: 1.1em;
+    font-weight: 300;
+    text-decoration: none;
+}
+
+.cbp-spmenu a:hover {
+    background: #fff;
+    color: #2A3744;
+    text-decoration: none;
+}
+
+.cbp-spmenu a:active {
+    background: #fff;
+    color: #2A3744;
+    text-decoration: none;
+}
+
+.cbp-spmenu-vertical {
+    width: 150px;
+    height: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.cbp-spmenu-vertical a {
+    //border-bottom: 1px solid #258ecd;
+    padding: 1em;
+}
+
+.cbp-spmenu-left {
+    box-shadow: 5px 0 5px -5px #333;
+    left: 0;
+}
+
+.cbp-spmenu-left.cbp-spmenu-open {
+    left: 0px;
+}
+
+#map {
+    height: 500px;
+}
+
+.logout-sidebar {
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+}
